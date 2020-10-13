@@ -1,0 +1,169 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<h2 class="left">
+  <a href="{{url_for('view.graph_view',dimension='2D',number='1')}}" class="heading">グラフ</a>
+</h2>
+{% if dimension=="2D" %}
+{% if number=="1" %}
+<div class="right">
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      関数の数を選択してください
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" href="{{url_for('view.graph_view',dimension='2D',number='1')}}">1</a>
+      <a class="dropdown-item" href="{{url_for('view.graph_view',dimension='2D',number='2')}}">2</a>
+    </div>
+  </div>
+</div>
+<div class="right">　　　</div>
+<div class="right">
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      次元を選択してください
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" href="{{url_for('view.graph_view',dimension='2D',number='1')}}">2次元</a>
+      <a class="dropdown-item" href="{{url_for('view.graph_view',dimension='3D',number='1')}}">3次元</a>
+    </div>
+  </div>
+</div>
+{% elif number=="2" %}
+<div class="right">
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      関数の数を選択してください
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" href="{{url_for('view.graph_view',dimension='2D',number='1')}}">1</a>
+      <a class="dropdown-item" href="{{url_for('view.graph_view',dimension='2D',number='2')}}">2</a>
+    </div>
+  </div>
+</div>
+<div class="right">　　　</div>
+<div class="right">
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      次元を選択してください
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" href="{{url_for('view.graph_view',dimension='2D',number='2')}}">2次元</a>
+      <a class="dropdown-item" href="{{url_for('view.graph_view',dimension='3D',number='2')}}">3次元</a>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% elif dimension=="3D" %}
+{% if number=="1" %}
+<div class="right">
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      関数の数を選択してください
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" href="{{url_for('view.graph_view',dimension='3D',number='1')}}">1</a>
+      <a class="dropdown-item" href="{{url_for('view.graph_view',dimension='3D',number='2')}}">2</a>
+    </div>
+  </div>
+</div>
+<div class="right">　　　</div>
+<div class="right">
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      次元を選択してください
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" href="{{url_for('view.graph_view',dimension='2D',number='1')}}">2次元</a>
+      <a class="dropdown-item" href="{{url_for('view.graph_view',dimension='3D',number='1')}}">3次元</a>
+    </div>
+  </div>
+</div>
+{% elif number=="2" %}
+<div class="right">
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      関数の数を選択してください
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" href="{{url_for('view.graph_view',dimension='3D',number='1')}}">1</a>
+      <a class="dropdown-item" href="{{url_for('view.graph_view',dimension='3D',number='2')}}">2</a>
+    </div>
+  </div>
+</div>
+<div class="right">　　　</div>
+<div class="right">
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      次元を選択してください
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" href="{{url_for('view.graph_view',dimension='2D',number='2')}}">2次元</a>
+      <a class="dropdown-item" href="{{url_for('view.graph_view',dimension='3D',number='2')}}">3次元</a>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endif %}
+
+<br><br><br>
+
+<form action='{{url_for("view.graph_view")}}' method="post" enctype="multipart/form-data">
+  <div class="form-group">
+    <label for="InputFormula_1">式を入力してください</label>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">f(x)=</span>
+      </div>
+      <input type="text" name="formula_1" class="form-control" id="InputFormula_1" value="{{formula_1}}" placeholder="formula_1">
+    </div>
+  </div>
+  {% if number=="2" %}
+  <div class="form-group">
+    <label for="InputFormula_2">式を入力してください</label>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">f(x)=</span>
+      </div>
+      <input type="text" name="formula_2" class="form-control" id="InputFormula_2" value="{{formula_2}}" placeholder="formula_2">
+    </div>
+  </div>
+  {% endif %}
+
+  <p>xの定義域を入力してください</p>
+  <div class="form-row align-items-center">
+    <div class="col-6">
+      <div class="input-group">
+        <input type="text" name="lower_end_x" class="form-control" value="{{lower_end_x}}" placeholder="lower_end_x" aria-describedby="basic-addon2">
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="input-group">
+        <input type="text" name="upper_end_x" class="form-control" value="{{upper_end_x}}" placeholder="upper_end_x" aria-describedby="basic-addon2">
+      </div>
+    </div>
+  </div>
+  {% if dimension=="3D" %}
+  <p>yの定義域を入力してください</p>
+  <div class="form-row align-items-center">
+    <div class="col-6">
+      <div class="input-group">
+        <input type="text" name="lower_end_y" class="form-control" value="{{lower_end_y}}" placeholder="lower_end_y" aria-describedby="basic-addon2">
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="input-group">
+        <input type="text" name="upper_end_y" class="form-control" value="{{upper_end_y}}" placeholder="upper_end_y" aria-describedby="basic-addon2">
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+  <br>
+  <input type="text" name="dimension" value="{{dimension}}" hidden>
+  <input type="text" name="number" value="{{number}}" hidden>
+
+  <button type="submit" class="btn btn-primary btn-block">描画</button>
+</form>
+
+{% endblock %}
