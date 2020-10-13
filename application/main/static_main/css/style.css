@@ -22,18 +22,3 @@
   text-decoration: none;
 }
 
-.left {
-  float: left;
-}
-
-.right {
-  float: right;
-}
-
-.inline {
-  display: inline-flex;
-}
-
-.center {
-  text-align: center;
-}
