@@ -1,0 +1,23 @@
+{% extends "layout_main.html" %}
+
+{% block body %}
+<br>
+<div class="card border-success">
+  <div class="card-header">
+    <b><a href='{{url_for("view.index_view")}}' class="heading">Flask Math</a></b>
+  </div>
+  <div class="card-body text-success">
+    <p class="card-text">Flask Math is a web application that can perform various calculations such as calculus and matrix.</p>
+  </div>
+</div>
+
+<div class="card border-success">
+  <div class="card-header">
+    <b><a href='{{url_for("cpu.index")}}' class="heading">Flask CPU</a></b>
+  </div>
+  <div class="card-body text-success">
+    <p class="card-text">Flask Math is a web application that can perform various calculations such as calculus and matrix.</p>
+  </div>
+</div>
+
+{% endblock %}

@@ -24,13 +24,14 @@
       <div class="collapse navbar-collapse justify-content-end">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="https://github.com/kouki7910/Flask-Math" target="_blank">
+            <a class="nav-link" href="https://github.com/kouki-0926" target="_blank">
               <img src="static/images/GitHub-Mark-64px.png" width="30" height="30" alt="GitHub">
             </a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">MENU</a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="{{ url_for('main.index_view')}}">トップページ</a>
               <a class="dropdown-item" href="{{ url_for('view.integral_view',dimension='2D')}}">積分</a>
               <a class="dropdown-item" href="{{ url_for('view.derivative_view') }}">微分</a>
               <a class="dropdown-item" href="{{ url_for('view.lim_view') }}">極限</a>
