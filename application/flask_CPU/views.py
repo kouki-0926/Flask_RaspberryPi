@@ -17,6 +17,7 @@ def measure():
         graph_type=request.args.get("graph_type")
     elif(request.method=="POST"):
         graph_type=request.form.get("graph_type")
+    print(graph_type)    
     return render_template("measure.html",Data=Data,graph_type=graph_type)
 
 
