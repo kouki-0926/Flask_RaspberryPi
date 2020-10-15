@@ -1,4 +1,4 @@
-from flask import redirect,url_for,render_template,flash,Blueprint
+from flask import render_template,flash,Blueprint
 
 main=Blueprint("main",__name__,template_folder='templates_main',static_folder="static_main")
 
@@ -9,4 +9,4 @@ def index_view():
 @main.app_errorhandler(404)
 def non_existant_route(error):
     flash("エラーコード：404　申し訳ございません. アクセスしたページは表示できません.")
-    return redirect(url_for("main.index_view"))
+    return render_template("404_error.html")

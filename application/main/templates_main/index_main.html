@@ -3,7 +3,7 @@
 {% block body %}
 <br>
 <div class="card-deck">
-  <div class="card border-success">
+  <div class="card text-center border-success">
     <div class="card-header">
       <b><a href='{{url_for("view.index_view")}}' class="heading">Flask Math</a></b>
     </div>
@@ -13,21 +13,25 @@
     <div class="card-body text-success">
       <p class="card-text">Flask Math is a web site that can perform various calculations such as calculus and matrix.</p>
     </div>
-  </div>  
+  </div>
 
   <br>
 
-  <div class="card border-success">
+  <div class="card text-center border-success">
     <div class="card-header">
       <b><a href='{{url_for("cpu.index")}}' class="heading">Flask CPU</a></b>
     </div>
+<<<<<<< HEAD
     <a href='{{url_for("cpu.index")}}' class="heading">
+=======
+    <a href='{{url_for("cpu.index")}}'>
+>>>>>>> 3ea3a4b1d79d19a6bd71c87963d8e50069951148
       <img src="static_main/images/CPU.png" alt="CPU" width="150" height="100">
     </a>
     <div class="card-body text-success">
       <p class="card-text">Flask CPU is a web site where you can get various values of CPU.</p>
     </div>
-  </div> 
-</div> 
+  </div>
+</div>
 
 {% endblock %}
