@@ -1,6 +1,5 @@
-from flask import request, redirect, url_for, render_template, flash, Blueprint
+from flask import request, redirect, url_for, render_template, flash, Blueprint ,make_response
 from flask_math.calculation import *
-from sympy import *
 
 Math=Blueprint("Math",__name__,template_folder='templates',static_folder="static")
 
@@ -166,59 +165,21 @@ def factorization_view():
 
 @Math.route("/graph",methods=["GET","POST"])
 def graph_view():
-    try:
-        if request.method=="POST":
-            number=request.form.get("number")
-            dimension=request.form.get("dimension")
-            formula_1=request.form.get("formula_1")
-            Formula=[formula_1]
-            lower_end_x=request.form.get("lower_end_x")
-            upper_end_x=request.form.get("upper_end_x")
-            Lower_end=[lower_end_x]
-            Upper_end=[upper_end_x]
-            if number=="1":
-                if dimension=="2D":
-                    graph.graph(Formula,Lower_end,Upper_end,dimension,number)
-                    return render_template("graph.html",formula_1=formula_1,lower_end_x=lower_end_x,upper_end_x=upper_end_x,dimension="2D",number="1")
-                elif dimension=="3D":
-                    lower_end_y=request.form.get("lower_end_y")
-                    upper_end_y=request.form.get("upper_end_y")
-                    Lower_end.append(lower_end_y)
-                    Upper_end.append(upper_end_y)
-                    graph.graph(Formula,Lower_end,Upper_end,dimension,number)
-                    return render_template("graph.html",formula_1=formula_1,lower_end_x=lower_end_x,upper_end_x=upper_end_x,
-                    lower_end_y=lower_end_y,upper_end_y=upper_end_y,dimension="3D",number="1")
-            elif number=="2":
-                formula_2=request.form.get("formula_2")
-                Formula.append(formula_2)
-                if dimension=="2D":
-                    graph.graph(Formula,Lower_end,Upper_end,dimension,number)
-                    return render_template("graph.html",formula_1=formula_1,formula_2=formula_2,lower_end_x=lower_end_x,upper_end_x=upper_end_x,dimension="2D",number="2")
-                elif dimension=="3D":
-                    lower_end_y=request.form.get("lower_end_y")
-                    upper_end_y=request.form.get("upper_end_y")
-                    Lower_end.append(lower_end_y)
-                    Upper_end.append(upper_end_y)
-                    graph.graph(Formula,Lower_end,Upper_end,dimension,number)
-                    return render_template("graph.html",formula_1=formula_1,formula_2=formula_2,lower_end_x=lower_end_x,upper_end_x=upper_end_x,
-                    lower_end_y=lower_end_y,upper_end_y=upper_end_y,dimension="3D",number="2")
-        elif request.method=="GET":
-            dimension=request.args.get("dimension")
-            number=request.args.get("number")
-            if number=="1" or number=="2":
-                if dimension=="2D":
-                    return render_template("graph.html",lower_end_x=-5,upper_end_x=5,dimension="2D",number=number)
-                elif dimension=="3D":
-                    return render_template("graph.html",lower_end_x=-5,upper_end_x=5,lower_end_y=-5,upper_end_y=5,dimension="3D",number=number)
-                else:
-                    flash("エラー:dimension")
-                    return redirect(url_for("Math.graph_view",dimension="2D",number="1"))
-            else:
-                flash("エラー:number")
-                return redirect(url_for("Math.graph_view",dimension="2D",number="1"))
-    except:
-        flash("エラー")
-        return redirect(url_for("Math.graph_view",dimension="2D",number="1"))
+    if request.method=="POST":
+        formula_1=request.form.get("formula_1")
+        lower_end_x=request.form.get("lower_end_x")
+        upper_end_x=request.form.get("upper_end_x")
+        return render_template("graph.html",formula_1=formula_1,lower_end_x=lower_end_x,upper_end_x=upper_end_x)
+    return render_template("graph.html",lower_end_x=-1,upper_end_x=1)
+
+
+@Math.route('/graph.png')
+def graph_png():
+    formula_1=request.args.get("formula_1")
+    lower_end_x=request.args.get("lower_end_x")
+    upper_end_x=request.args.get("upper_end_x")
+    response=graph.graph(formula_1,lower_end_x,upper_end_x)
+    return response
 
 
 @Math.route("/integral",methods=["GET","POST"])
