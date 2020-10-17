@@ -2,24 +2,24 @@ from flask import request, redirect, url_for, render_template, flash, Blueprint
 from flask_math.calculation import *
 from sympy import *
 
-view=Blueprint("view",__name__,template_folder='templates',static_folder="static")
+Math=Blueprint("Math",__name__,template_folder='templates',static_folder="static")
 
-@view.route("/index")
+@Math.route("/index")
 def index_view():
     return render_template("index.html")
 
 
-@view.route("/index_2")
+@Math.route("/index_2")
 def index_2_view():
     return render_template("index_2.html")
 
 
-@view.route("/instructions")
+@Math.route("/instructions")
 def instructions_view():
     return render_template("instructions.html")
 
 
-@view.route("/base_conversion",methods=["GET","POST"])
+@Math.route("/base_conversion",methods=["GET","POST"])
 def base_conversion_view():
     if request.method=="POST":
         try:
@@ -44,7 +44,7 @@ def base_conversion_view():
         return render_template("base_conversion.html")
 
 
-@view.route("/BMI",methods=["GET","POST"])
+@Math.route("/BMI",methods=["GET","POST"])
 def BMI_view():
     if request.method=="POST":
         height=request.form.get("height")
@@ -55,7 +55,7 @@ def BMI_view():
         return render_template("BMI.html")
 
 
-@view.route("/derivative",methods=["GET","POST"])
+@Math.route("/derivative",methods=["GET","POST"])
 def derivative_view():
     if request.method=="POST":
         formula=request.form.get("formula")
@@ -67,7 +67,7 @@ def derivative_view():
         return render_template("derivative.html",type="x")
 
 
-@view.route("/diff_equation",methods=["GET","POST"])
+@Math.route("/diff_equation",methods=["GET","POST"])
 def diff_equation_view():
     if request.method=="POST":
         formula=request.form.get("formula")
@@ -77,7 +77,7 @@ def diff_equation_view():
         return render_template("diff_equation.html")
 
 
-@view.route("/equation",methods=["GET","POST"])
+@Math.route("/equation",methods=["GET","POST"])
 def equation_view():
     if request.method=="POST":
         formula=request.form.get("formula")
@@ -87,7 +87,7 @@ def equation_view():
         return render_template("equation.html")
 
 
-@view.route("/equations",methods=["GET","POST"])
+@Math.route("/equations",methods=["GET","POST"])
 def equations_view():
     try:
         if request.method=="POST":
@@ -117,13 +117,13 @@ def equations_view():
             if number>=1 and number<=3:
                 return render_template("equations.html",number=number)
             else:
-                return redirect(url_for("view.equations_view",number=1))
+                return redirect(url_for("Math.equations_view",number=1))
     except:
         flash("エラー：もう一度入力してください")
         return render_template("equations.html",number=1)
 
 
-@view.route("/Euclidean_Algorithm",methods=["GET","POST"])
+@Math.route("/Euclidean_Algorithm",methods=["GET","POST"])
 def Euclidean_Algorithm_view():
     if request.method=="POST":
         number_x=request.form.get("number_x")
@@ -134,7 +134,7 @@ def Euclidean_Algorithm_view():
         return render_template("Euclidean_Algorithm.html")
 
 
-@view.route("/Expand",methods=["GET","POST"])
+@Math.route("/Expand",methods=["GET","POST"])
 def Expand_view():
     if request.method=="POST":
         formula=request.form.get("formula")
@@ -144,7 +144,7 @@ def Expand_view():
         return render_template("Expand.html")
 
 
-@view.route("/Factorial",methods=["GET","POST"])
+@Math.route("/Factorial",methods=["GET","POST"])
 def Factorial_view():
     if request.method=="POST":
         formula=request.form.get("formula")
@@ -154,7 +154,7 @@ def Factorial_view():
         return render_template("Factorial.html")
 
 
-@view.route("/factorization",methods=["GET","POST"])
+@Math.route("/factorization",methods=["GET","POST"])
 def factorization_view():
     if request.method=="POST":
         formula=request.form.get("formula")
@@ -164,7 +164,7 @@ def factorization_view():
         return render_template("factorization.html")
 
 
-@view.route("/graph",methods=["GET","POST"])
+@Math.route("/graph",methods=["GET","POST"])
 def graph_view():
     try:
         if request.method=="POST":
@@ -212,16 +212,16 @@ def graph_view():
                     return render_template("graph.html",lower_end_x=-5,upper_end_x=5,lower_end_y=-5,upper_end_y=5,dimension="3D",number=number)
                 else:
                     flash("エラー:dimension")
-                    return redirect(url_for("view.graph_view",dimension="2D",number="1"))
+                    return redirect(url_for("Math.graph_view",dimension="2D",number="1"))
             else:
                 flash("エラー:number")
-                return redirect(url_for("view.graph_view",dimension="2D",number="1"))
+                return redirect(url_for("Math.graph_view",dimension="2D",number="1"))
     except:
         flash("エラー")
-        return redirect(url_for("view.graph_view",dimension="2D",number="1"))
+        return redirect(url_for("Math.graph_view",dimension="2D",number="1"))
 
 
-@view.route("/integral",methods=["GET","POST"])
+@Math.route("/integral",methods=["GET","POST"])
 def integral_view():
     if request.method=="POST":
         formula=request.form.get("formula")
@@ -252,10 +252,10 @@ def integral_view():
             return render_template("integral.html",dimension=dimension,type="multiple_integral_1")
         else:
             flash("エラー:dimension")
-            return redirect(url_for("view.integral_view",dimension="2D"))
+            return redirect(url_for("Math.integral_view",dimension="2D"))
 
 
-@view.route("/lim",methods=["GET","POST"])
+@Math.route("/lim",methods=["GET","POST"])
 def lim_view():
     if request.method=="POST":
         formula=request.form.get("formula")
@@ -266,7 +266,7 @@ def lim_view():
         return render_template("lim.html",a=0)
 
 
-@view.route("/matrix",methods=["GET","POST"])
+@Math.route("/matrix",methods=["GET","POST"])
 def matrix_view():
     if request.method=="POST":
         matrixA=request.form.get("matrix")
@@ -289,7 +289,7 @@ def matrix_view():
         return render_template("matrix.html",Ar=2,Ac=2,type="A")
 
 
-@view.route("/matrix_2",methods=["GET","POST"])
+@Math.route("/matrix_2",methods=["GET","POST"])
 def  matrix_2_view():
     if request.method=="POST":
         matrixA=request.form.get("matrixA")
@@ -318,7 +318,7 @@ def  matrix_2_view():
         return render_template("matrix_2.html",Ar=2,Ac=2,Br=2,Bc=2,type="A",k=2,l=2)
 
 
-@view.route("/max_min",methods=["GET","POST"])
+@Math.route("/max_min",methods=["GET","POST"])
 def max_min_view():
     if request.method=="POST":
         formula=request.form.get("formula")
@@ -328,7 +328,7 @@ def max_min_view():
         return render_template("max_min.html")
 
 
-@view.route("/newton_method",methods=["GET","POST"])
+@Math.route("/newton_method",methods=["GET","POST"])
 def  newton_method_view():
     if request.method=="POST":
         number=request.form.get("number")
@@ -338,7 +338,7 @@ def  newton_method_view():
         return render_template("newton_method.html",anser_0="initial")
 
 
-@view.route("/prime_factorization",methods=["GET","POST"])
+@Math.route("/prime_factorization",methods=["GET","POST"])
 def  prime_factorization_view():
     if request.method=="POST":
         number=request.form.get("number")
@@ -348,7 +348,7 @@ def  prime_factorization_view():
         return render_template("prime_factorization.html")
 
 
-@view.route("/Sieve_of_Eratosthenes",methods=["GET","POST"])
+@Math.route("/Sieve_of_Eratosthenes",methods=["GET","POST"])
 def  Sieve_of_Eratosthenes_view():
     if request.method=="POST":
         number=request.form.get("number")
@@ -358,7 +358,7 @@ def  Sieve_of_Eratosthenes_view():
         return render_template("Sieve_of_Eratosthenes.html")
 
 
-@view.route("/taylor",methods=["GET","POST"])
+@Math.route("/taylor",methods=["GET","POST"])
 def  taylor_view():
     if request.method=="POST":
         formula=request.form.get("formula")

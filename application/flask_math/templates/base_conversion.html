@@ -1,10 +1,10 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<h2><a href='{{url_for("view.base_conversion_view")}}' class="heading">進数変換</a></h2>
+<h2><a href='{{url_for("Math.base_conversion_view")}}' class="heading">進数変換</a></h2>
 <br>
 
-<form action='{{url_for("view.base_conversion_view")}}' method="post" enctype="multipart/form-data">
+<form action='{{url_for("Math.base_conversion_view")}}' method="post" enctype="multipart/form-data">
   <div class="form-group">
     <label for="InputBin">2進数</label>
     <input type="text" name="bin" class="form-control" id="InputBin" value="{{bin}}" placeholder="bin">
@@ -27,7 +27,7 @@
 </form>
 
 <br>
-<form action='{{url_for("view.base_conversion_view")}}' method="get" enctype="multipart/form-data">
+<form action='{{url_for("Math.base_conversion_view")}}' method="get" enctype="multipart/form-data">
   <button type="submit" class="btn btn-danger btn-block">全削除</button>
 </form>
 

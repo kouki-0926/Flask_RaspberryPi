@@ -1,10 +1,10 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<h2><a href="{{url_for('view.matrix_view')}}" class="heading">行列</a></h2>
+<h2><a href="{{url_for('Math.matrix_view')}}" class="heading">行列</a></h2>
 <br>
 
-<form action='{{url_for("view.matrix_view")}}' method="post" enctype="multipart/form-data">
+<form action='{{url_for("Math.matrix_view")}}' method="post" enctype="multipart/form-data">
   <!-- 行列Aの入力 -->
   <div class="form-group">
     <label for="InputMatrix">行列Aを入力してください</label>

@@ -2,7 +2,7 @@
 
 {% block body %}
 <h2 class="left">
-  <a href="{{url_for('view.integral_view',dimension='2D')}}" class="heading">積分</a>
+  <a href="{{url_for('Math.integral_view',dimension='2D')}}" class="heading">積分</a>
 </h2>
 <div class="right">
   <div class="dropdown">
@@ -10,15 +10,15 @@
       選択してください
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <a class="dropdown-item" href="{{url_for('view.integral_view',dimension='2D')}}">積分</a>
-      <a class="dropdown-item" href="{{url_for('view.integral_view',dimension='3D')}}">重積分</a>
+      <a class="dropdown-item" href="{{url_for('Math.integral_view',dimension='2D')}}">積分</a>
+      <a class="dropdown-item" href="{{url_for('Math.integral_view',dimension='3D')}}">重積分</a>
     </div>
   </div>
 </div>
 
 <br><br><br>
 
-<form action='{{url_for("view.integral_view")}}' method="post" enctype="multipart/form-data">
+<form action='{{url_for("Math.integral_view")}}' method="post" enctype="multipart/form-data">
   <!-- 関数などの入力 -->
   <div class="form-group">
     <label for="InputFormula">被積分関数を入力してください</label>
