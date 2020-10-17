@@ -35,7 +35,7 @@
 </form>
 
 {% if formula_1 %}
-<img src="{{url_for('Math.graph_png',formula_1=formula_1,lower_end_x=lower_end_x,upper_end_x=upper_end_x)}}" width="1000vw" height="auto"></img>
+<img src="{{url_for('Math.graph_png',formula_1=formula_1,lower_end_x=lower_end_x,upper_end_x=upper_end_x)}}" class="graph"></img>
 {% endif %}
 
 {% endblock %}

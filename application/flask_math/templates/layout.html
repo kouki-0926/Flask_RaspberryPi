@@ -34,6 +34,7 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">MENU</a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="{{ url_for('main.index_view')}}">トップページ</a>
               <a class="dropdown-item" href="{{ url_for('Math.integral_view',dimension='2D')}}">積分</a>
               <a class="dropdown-item" href="{{ url_for('Math.derivative_view') }}">微分</a>
               <a class="dropdown-item" href="{{ url_for('Math.lim_view') }}">極限</a>

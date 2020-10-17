@@ -2,11 +2,13 @@
     "editor.hover.enabled": false,
     "editor.minimap.enabled": false,
     "window.zoomLevel": 1.2,
-    // "editor.fontSize": 23,
+
+ // raspberry pi
+    "editor.fontSize": 15,
 
  // windows
-    "editor.fontSize": 18,
+   //  "editor.fontSize": 18,
     
- //ipad
+ // ipad
     // "editor.fontSize": 18,
 }
