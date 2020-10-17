@@ -10,11 +10,10 @@
 {% endblock %}
 
 {% block BODY %}
-
-{% for data in Data %}
-  <h2>{{data}}</h2>
-{% endfor %}
-<br>
+<h3>{{Data[0]}}</h3>
+<h3>{{Data[1]}}</h3>
+<h3>{{Data[2]}}</h3>
+<h3>{{Data[3]}}　{{Data[4]}}　{{Data[5]}}</h3>
 
 <div class="form-check form-check-inline">
   {% if graph_type=="temp" %}
@@ -71,7 +70,8 @@
   </label>
 </div>
 
-
-<img src="{{url_for('cpu.graph',graph_type=graph_type)}}"></img>
+<div>
+  <img src="{{url_for('cpu.graph',graph_type=graph_type)}}"></img>
+</div>
 
 {% endblock %}

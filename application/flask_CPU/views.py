@@ -17,7 +17,7 @@ def measure():
         graph_type=request.args.get("graph_type")
     elif(request.method=="POST"):
         graph_type=request.form.get("graph_type")
-    print(graph_type)    
+    print(graph_type)
     return render_template("measure.html",Data=Data,graph_type=graph_type)
 
 
@@ -26,7 +26,7 @@ def measure():
 def graph():
     graph_type=request.args.get("graph_type")
 
-    fig=plt.figure(figsize=(7,8))
+    fig=plt.figure(figsize=(9,8))
     plt.xlabel("time")
     plt.xticks(rotation=45)
 
@@ -36,6 +36,16 @@ def graph():
     elif(graph_type=="clock"):
         plt.title('clock')
         plt.ylabel("clock [GHz]")
+    elif(graph_type=="volt"):
+        plt.title('volt')
+        plt.ylabel("volt [v]")
+    elif(graph_type=="arm"):
+        plt.title('arm')
+        plt.ylabel("arm [MB]")
+    elif(graph_type=="gpu"):
+        plt.title('gpu')
+        plt.ylabel("gpu [MB]")
+
 
     Data=CPU.measure_CPU2(graph_type)
     plt.plot(Data[0],Data[1])
