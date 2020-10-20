@@ -4,7 +4,7 @@
     "window.zoomLevel": 1.2,
 
  // raspberry pi
-    "editor.fontSize": 15,
+    "editor.fontSize": 14,
 
  // windows
    //  "editor.fontSize": 18,

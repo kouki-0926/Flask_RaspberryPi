@@ -11,5 +11,5 @@
 
 {% block body %}
 <h2>I'm sorry. The specified URL does not exist.</h2>
-<h2>Moves to the top page after 3 seconds.</h2>
+<h2>Moves to the <a href="{{url_for('main.index_view')}}">Top Page</a> after 3 seconds.</h2>
 {% endblock %}
