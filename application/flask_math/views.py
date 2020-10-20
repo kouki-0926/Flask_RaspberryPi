@@ -170,7 +170,8 @@ def graph_view():
         lower_end_x=request.form.get("lower_end_x")
         upper_end_x=request.form.get("upper_end_x")
         return render_template("graph.html",formula_1=formula_1,lower_end_x=lower_end_x,upper_end_x=upper_end_x)
-    return render_template("graph.html",lower_end_x=-1,upper_end_x=1)
+    else:
+        return render_template("graph.html",lower_end_x=-10,upper_end_x=10)
 
 
 @Math.route('/graph.png')

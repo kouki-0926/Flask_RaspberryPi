@@ -21,7 +21,7 @@
 <form action='{{url_for("Math.integral_view")}}' method="post" enctype="multipart/form-data">
   <!-- 関数などの入力 -->
   <div class="form-group">
-    <label for="InputFormula">被積分関数を入力してください</label>
+    <label for="InputFormula">被積分関数f(x)を入力してください</label>
     <div class="input-group">
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon1">f(x)=</span>
@@ -121,7 +121,7 @@
     </div>
     {% endif %}
     {% endif %}
-  </div>
+  </div><br>
 
   <input type="text" name="dimension" value="{{dimension}}" hidden>
   <button type="submit" class="btn btn-primary btn-block">計算</button>

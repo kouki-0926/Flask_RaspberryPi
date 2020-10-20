@@ -13,19 +13,17 @@ def graph(formula_1,lower_end_x,upper_end_x):
         upper_end_x=sympify(upper_end_x)
 
         if(lower_end_x>=upper_end_x):
-            flash("下端に上端よりも大きい値が入力されています. もう一度入力してください.")
+            tmp=upper_end_x
+            upper_end_x=lower_end_x
+            lower_end_x=tmp
 
         # データ作成
         num=300
+        dx=(upper_end_x-lower_end_x)/num
         t,y=[],[]
-        if(lower_end_x==-num):
-            dx=(upper_end_x-lower_end_x)/(num+1+lower_end_x)
-        else:    
-            dx=(upper_end_x-lower_end_x)/(num+lower_end_x)
-
-        for i in range(int(lower_end_x),int((upper_end_x-lower_end_x)/dx),1):
-            t.append(lower_end_x+dx*i)
-            y.append(formula_1.subs(x,lower_end_x+dx*i))
+        for i in range(int(lower_end_x/dx),int(upper_end_x/dx),1):
+            t.append(dx*i)
+            y.append(formula_1.subs(x,dx*i))
 
         fig = plt.figure(figsize=(7,4))
         plt.plot(t,y)
