@@ -1,0 +1,33 @@
+{% extends "layout_cpu.html" %}
+
+{% block BODY %}
+
+<h3>{{Data[0]}}</h3>
+<h3>{{Data[1]}}発表</h3>
+
+<div class="card-deck">
+    {% for data in Forecast %}
+    <div class="card text-center border-success">
+        <div class="card-header">
+            <h4>{{data[0]}}の天気</h4>
+        </div>
+        <div class="card-body text-success">
+            <p>{{data[1]}}</p>
+            <p>{{data[2]}}</p>
+            <p>{{data[3]}}</p>
+            <p>{{data[4]}}</p>
+            <p>{{data[5]}}</p>
+            <p>{{data[6]}}</p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<h5>{{Data[2]}}</h5>
+<br><hr>
+<a href="{{Data[3]}}" class="heading" target="_blank"><h6>天気予報API(livedoor 天気互換)</h6></a>
+<a href="{{Data[4]}}" class="heading" target="_blank"><h6>気象庁HP</h6></a>
+
+<img src="{{Data[5]}}" width=50 height=31></img>
+
+{% endblock %}
