@@ -13,21 +13,24 @@
         </div>
         <div class="card-body text-success">
             <p>{{data[1]}}</p>
-            <p>{{data[2]}}</p>
-            <p>{{data[3]}}</p>
-            <p>{{data[4]}}</p>
+            <img src="{{data[2]}}" width=50 height=31></img>
+            <p>{{data[3]}} {{data[4]}}</p>
             <p>{{data[5]}}</p>
             <p>{{data[6]}}</p>
+            <p>{{data[7]}}</p>
+            <p>{{data[8]}}</p>
         </div>
     </div>
     {% endfor %}
 </div>
 
 <h5>{{Data[2]}}</h5>
-<br><hr>
-<a href="{{Data[3]}}" class="heading" target="_blank"><h6>天気予報API(livedoor 天気互換)</h6></a>
-<a href="{{Data[4]}}" class="heading" target="_blank"><h6>気象庁HP</h6></a>
+<h5>{{Data[3]}}</h5>
 
-<img src="{{Data[5]}}" width=50 height=31></img>
+<br><hr>
+<a href="{{Data[4]}}" class="heading" target="_blank">
+    <img src="{{Data[5]}}" width=45 height=45>天気予報API(livedoor 天気互換)</img>
+</a>
+<a href="{{Data[6]}}" class="heading" target="_blank"><h6>気象庁HP</h6></a>
 
 {% endblock %}

@@ -1,4 +1,3 @@
-import requests
 from flask import redirect,request,url_for,render_template,flash,Blueprint,make_response
 from io import BytesIO
 from matplotlib.backends.backend_agg import FigureCanvasAgg
@@ -62,46 +61,7 @@ def graph():
 
 @cpu.route("/weather",methods=["GET","POST"])
 def weather():
-    url = "https://weather.tsukumijima.net/api/forecast"
-    payload = {"city": "120010"}
-    data = requests.get(url, params=payload).json()
-
-    Data=[]
-
-    title = "{}予報です".format(data["title"])
-    Data.append(title)
-    Forecast=[]
-
-    for i in range(0, 3, 1):
-        forecast=[]
-        date="{} {}".format(data["forecasts"][i]["dateLabel"], data["forecasts"][1]["date"])
-        forecast.append(date)
-
-        try:
-            max_temp="最高気温{}℃".format(data["forecasts"][i]["temperature"]["max"]["celsius"])
-        except:
-            max_temp="最高気温{}℃".format("null")
-        forecast.append(max_temp)   
-
-        try:
-            min_temp="最低気温{}℃".format(data["forecasts"][i]["temperature"]["min"]["celsius"])
-        except:
-            min_temp="最低気温{}℃".format("null")
-        forecast.append(min_temp)    
-
-        forecast.append("0時から6時までの降水確率   {}".format(data["forecasts"][i]["chanceOfRain"]["00-06"]))
-        forecast.append("6時から12時までの降水確率  {}".format(data["forecasts"][i]["chanceOfRain"]["06-12"]))
-        forecast.append("12時から18時までの降水確率 {}".format(data["forecasts"][i]["chanceOfRain"]["12-18"]))
-        forecast.append("18時から24時までの降水確率 {}".format(data["forecasts"][i]["chanceOfRain"]["18-24"]))
-        Forecast.append(forecast)
-
-    Data.append("{}".format(data["publicTime_format"]))
-    Data.append("{}".format(data["description"]["text"]))
-    Data.append("{}".format(data["copyright"]["link"]))
-    Data.append("{}".format(data["copyright"]["provider"][0]["link"]))
-
-    Data.append("{}".format(data["forecasts"][0]["image"]["url"]))
-
-    return render_template("weather.html", Data=Data, Forecast=Forecast)
+    info=get_weather.get_weather()
+    return render_template("weather.html", Data=info[0], Forecast=info[1])
 
 
