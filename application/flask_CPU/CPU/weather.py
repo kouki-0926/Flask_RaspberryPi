@@ -1,9 +1,16 @@
 import requests
 
 Data,Forecast=[],[]
+pref_num="13"
 
 def get_weather():
-    return [Data,Forecast] 
+    return [Data,Forecast]
+
+def change_pref(new_pref_num):
+    global pref_num
+    pref_num=str(new_pref_num)
+    print("pref_num="+pref_num)
+    update_weather()
 
 def update_weather():
     print("update weather")
@@ -11,7 +18,7 @@ def update_weather():
     Data, Forecast=[],[]
 
     url = "https://weather.tsukumijima.net/api/forecast"
-    payload = {"city": "120010"}
+    payload = {"city": pref_num+"0010"}
     data = requests.get(url, params=payload).json()
     #地点　0
     Data.append("{}予報です".format(data["title"]))

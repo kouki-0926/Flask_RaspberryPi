@@ -3,7 +3,7 @@ import sys
 sys.dont_write_bytecode = True
 from flask import Flask
 
-from flask_CPU.CPU.get_weather import update_weather
+from flask_CPU.CPU.weather import update_weather
 from flask_CPU.views import cpu
 from flask_math.views import Math
 from main.views import main
