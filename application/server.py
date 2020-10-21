@@ -1,13 +1,20 @@
+from apscheduler.schedulers.background import BackgroundScheduler
 import sys
-sys.dont_write_bytecode=True
-
+sys.dont_write_bytecode = True
 from flask import Flask
-from main.views import main
-from flask_math.views import Math
+
+from flask_CPU.CPU.get_weather import update_weather
 from flask_CPU.views import cpu
+from flask_math.views import Math
+from main.views import main
 
 app=Flask(__name__)
 app.config.from_object("config")
+
+update_weather()
+sched = BackgroundScheduler(standalone=True, coalesce=True)
+sched.add_job(update_weather, 'interval', minutes=10)
+sched.start()
 
 app.register_blueprint(main)
 app.register_blueprint(Math,url_prefix="/flask_math")
