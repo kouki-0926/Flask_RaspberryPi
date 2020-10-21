@@ -25,7 +25,8 @@ def update_weather():
     for i in range(0, 3, 1):
         forecast=[]
         #日付　0
-        forecast.append("{} {}".format(data["forecasts"][i]["dateLabel"], data["forecasts"][i]["date"]))
+        date=str(data["forecasts"][i]["date"]).split("-")
+        forecast.append("{} {}".format(data["forecasts"][i]["dateLabel"],date[1]+"/"+date[2]))
         #天気　1
         forecast.append("{}".format(data["forecasts"][i]["telop"]))
         #天気アイコン　2

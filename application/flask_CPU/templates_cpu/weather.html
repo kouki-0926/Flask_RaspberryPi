@@ -1,6 +1,31 @@
 {% extends "layout_cpu.html" %}
 
 {% block BODY %}
+<br>
+<!-- 時計の表示 -->
+<h4 id="RealtimeClock" class="left"></h4>
+<script>
+    function setfig(num) {
+        var ret;
+        if (num < 10) {
+            ret = "0" + num;
+        } else {
+            ret = num;
+        }
+        return ret;
+    }
+    function showClock() {
+        var nowTime = new Date();
+        var nowHour = setfig(nowTime.getHours());
+        var nowMin = setfig(nowTime.getMinutes());
+        var nowSec = setfig(nowTime.getSeconds());
+        var msg = "現在時刻:" + nowHour + ":" + nowMin + ":" + nowSec;
+        document.getElementById("RealtimeClock").innerHTML = msg;
+    }
+    setInterval('showClock()', 1000);
+</script>
+
+<!-- 都道府県選択 -->
 <select id="pref_id" class="right">
     <option value="" selected>都道府県を選択してください</option>
     <optgroup label="北海道・東北">
@@ -73,7 +98,8 @@
 </script>
 
 <br><br>
-<h3>{{Data[0]}} {{Data[1]}}発表</h3>
+<h3>{{Data[0]}} </h3>
+<h3>{{Data[1]}}発表</h3>
 <br>
 
 <div class="card-deck">
