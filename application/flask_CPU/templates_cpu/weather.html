@@ -1,9 +1,80 @@
 {% extends "layout_cpu.html" %}
 
 {% block BODY %}
+<select id="pref_id" class="right">
+    <option value="" selected>都道府県を選択してください</option>
+    <optgroup label="北海道・東北">
+        <option value="016010">北海道・札幌</option>
+        <option value="020010">青森県・青森</option>
+        <option value="030010">岩手県・盛岡</option>
+        <option value="040010">宮城県・仙台</option>
+        <option value="050010">秋田県・秋田</option>
+        <option value="060010">山形県・山形</option>
+        <option value="070010">福島県・福島</option>
+    </optgroup>
+    <optgroup label="関東">
+        <option value="080010">茨城県・水戸</option>
+        <option value="090010">栃木県・宇都宮</option>
+        <option value="100010">群馬県・前橋</option>
+        <option value="110010">埼玉県・さいたま</option>
+        <option value="120010">千葉県・千葉</option>
+        <option value="130010">東京都・東京</option>
+        <option value="140010">神奈川県・横浜</option>
+    </optgroup>
+    <optgroup label="中部">
+        <option value="150010">新潟県・新潟</option>
+        <option value="160010">富山県・富山</option>
+        <option value="170010">石川県・金沢</option>
+        <option value="180010">福井県・福井</option>
+        <option value="190010">山梨県・甲府</option>
+        <option value="200010">長野県・長野</option>
+        <option value="210010">岐阜県・岐阜</option>
+        <option value="220010">静岡県・静岡</option>
+        <option value="230010">愛知県・名古屋</option>
+        <option value="240010">三重県・津</option>
+    </optgroup>
+    <optgroup label="近畿">
+        <option value="250010">滋賀県・大津</option>
+        <option value="260010">京都府・京都</option>
+        <option value="270000">大阪府・大阪</option>
+        <option value="280010">兵庫県・神戸</option>
+        <option value="290010">奈良県・奈良</option>
+        <option value="300010">和歌山県・和歌山</option>
+    </optgroup>
+    <optgroup label="中国">
+        <option value="310010">鳥取県・鳥取</option>
+        <option value="320010">島根県・松江</option>
+        <option value="330010">岡山県・岡山</option>
+        <option value="340010">広島県・広島</option>
+        <option value="350020">山口県・山口</option>
+    </optgroup>
+    <optgroup label="四国">
+        <option value="360010">徳島県・徳島</option>
+        <option value="370000">香川県・高松</option>
+        <option value="380010">愛媛県・松山</option>
+        <option value="390010">高知県・高知</option>
+    </optgroup>
+    <optgroup label="九州・沖縄">
+        <option value="400010">福岡県・福岡</option>
+        <option value="410010">佐賀県・佐賀</option>
+        <option value="420010">長崎県・長崎</option>
+        <option value="430010">熊本県・熊本</option>
+        <option value="440010">大分県・大分</option>
+        <option value="450010">宮崎県・宮崎</option>
+        <option value="460010">鹿児島県・鹿児島</option>
+        <option value="471010">沖縄県・那覇</option>
+    </optgroup>
+</select>
+<script>
+    const selected = document.getElementById("pref_id");
+    selected.onchange = function () {
+        location.href = "{{url_for('cpu.weather_view')}}" + "?new_pref_num=" + selected.value;
+    };
+</script>
 
-<h3>{{Data[0]}}</h3>
-<h3>{{Data[1]}}発表</h3>
+<br><br>
+<h3>{{Data[0]}} {{Data[1]}}発表</h3>
+<br>
 
 <div class="card-deck">
     {% for data in Forecast %}
@@ -24,89 +95,13 @@
     {% endfor %}
 </div>
 
+<br>
 <h5>{{Data[2]}}</h5>
-<h5>{{Data[3]}}</h5>
 
 <br><hr>
-<a href="{{Data[4]}}" class="heading" target="_blank">
-    <img src="{{Data[5]}}" width=45 height=45>天気予報API(livedoor 天気互換)</img>
+<a href="{{Data[3]}}" class="heading" target="_blank">
+    <img src="{{Data[4]}}" width=45 height=45>天気予報API(livedoor 天気互換)</img>
 </a>
-<a href="{{Data[6]}}" class="heading" target="_blank"><h6>気象庁HP</h6></a>
-
-
-
+<a href="{{Data[5]}}" class="heading" target="_blank"><h6>気象庁HP</h6></a>
 {% endblock %}
 
-{% block SCRIPT %}
-<select id="pref_id">
-    <option value="" selected>都道府県を選択してください</option>
-    <optgroup label="北海道・東北">
-    <option value="01">北海道</option>
-    <option value="02">青森県</option>
-    <option value="03">岩手県</option>
-    <option value="04">宮城県</option>
-    <option value="05">秋田県</option>
-    <option value="06">山形県</option>
-    <option value="07">福島県</option>
-    </optgroup>
-    <optgroup label="関東">
-    <option value="08">茨城県</option>
-    <option value="09">栃木県</option>
-    <option value="10">群馬県</option>
-    <option value="11">埼玉県</option>
-    <option value="12">千葉県</option>
-    <option value="13">東京都</option>
-    <option value="14">神奈川県</option>
-    </optgroup>
-    <optgroup label="中部">
-    <option value="15">新潟県</option>
-    <option value="16">富山県</option>
-    <option value="17">石川県</option>
-    <option value="18">福井県</option>
-    <option value="19">山梨県</option>
-    <option value="20">長野県</option>
-    <option value="21">岐阜県</option>
-    <option value="22">静岡県</option>
-    <option value="23">愛知県</option>
-    <option value="24">三重県</option>
-    </optgroup>
-    <optgroup label="近畿">
-    <option value="25">滋賀県</option>
-    <option value="26">京都府</option>
-    <option value="27">大阪府</option>
-    <option value="28">兵庫県</option>
-    <option value="29">奈良県</option>
-    <option value="30">和歌山県</option>
-    </optgroup>
-    <optgroup label="中国">
-    <option value="31">鳥取県</option>
-    <option value="32">島根県</option>
-    <option value="33">岡山県</option>
-    <option value="34">広島県</option>
-    <option value="35">山口県</option>
-    </optgroup>
-    <optgroup label="四国">
-    <option value="36">徳島県</option>
-    <option value="37">香川県</option>
-    <option value="38">愛媛県</option>
-    <option value="39">高知県</option>
-    </optgroup>
-    <optgroup label="九州・沖縄">
-    <option value="40">福岡県</option>
-    <option value="41">佐賀県</option>
-    <option value="42">長崎県</option>
-    <option value="43">熊本県</option>
-    <option value="44">大分県</option>
-    <option value="45">宮崎県</option>
-    <option value="46">鹿児島県</option>
-    <option value="47">沖縄県</option>
-    </optgroup>
-</select>
-<script>
-    const selected = document.getElementById("pref_id");
-    selected.onchange = function () {        
-        location.href = "{{url_for('cpu.weather_view')}}"+"?new_pref_num="+selected.value;
-    };
-</script>
-
-{% endblock %}

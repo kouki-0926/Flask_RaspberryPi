@@ -1,7 +1,7 @@
 import requests
 
 Data,Forecast=[],[]
-pref_num="13"
+pref_num = "130010"
 
 def get_weather():
     return [Data,Forecast]
@@ -18,7 +18,7 @@ def update_weather():
     Data, Forecast=[],[]
 
     url = "https://weather.tsukumijima.net/api/forecast"
-    payload = {"city": pref_num+"0010"}
+    payload = {"city": pref_num}
     data = requests.get(url, params=payload).json()
     #地点　0
     Data.append("{}予報です".format(data["title"]))
@@ -48,15 +48,13 @@ def update_weather():
         Forecast.append(forecast)
     #時刻  1
     Data.append("{}".format(data["publicTime_format"]))
-    #天気予報  2,3
-    description=str(data["description"]["text"]).split("<天気変化等の留意点>")
-    Data.append("{}".format(description[0]))
-    Data.append("<天気変化等の留意点> {}".format(description[1]))
-    #copyright link 4
+    #天気予報  2
+    Data.append("{}".format(data["description"]["text"]))
+    #copyright link 3
     Data.append("{}".format(data["copyright"]["link"]))
-    #copyrught 画像  5
+    #copyrught 画像  4
     Data.append("{}".format(data["copyright"]["image"]["url"]))
-    #気象庁 url  6
+    #気象庁 url  5
     Data.append("{}".format(data["copyright"]["provider"][0]["link"]))
 
 

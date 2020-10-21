@@ -18,3 +18,15 @@
   width: 100%;
   height: auto;
 }
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.center {
+  float: center;
+}
