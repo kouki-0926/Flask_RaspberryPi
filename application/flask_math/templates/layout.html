@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=1024" />
   <title>Flask Math</title>
   <!-- bootstrapのインポート -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
@@ -33,7 +34,7 @@
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">MENU</a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="{{ url_for('main.index_view')}}">トップページ</a>
               <a class="dropdown-item" href="{{ url_for('Math.integral_view',dimension='2D')}}">積分</a>
               <a class="dropdown-item" href="{{ url_for('Math.derivative_view') }}">微分</a>
