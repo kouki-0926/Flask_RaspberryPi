@@ -1,10 +1,14 @@
+from matplotlib.backends.backend_agg import FigureCanvasAgg
+import matplotlib.pyplot as plt
+from flask import make_response
 from subprocess import getoutput
+from io import BytesIO
 import datetime
 import os
 
 display_Data=[]
 graph_Data=[[],[],[],[],[],[]]
-def measure_CPU():
+def get_display_Data():
     update_CPU()
     return display_Data
 
@@ -56,7 +60,7 @@ def measure_gpu():
     return "gpu: "+gpu[0]+"MB"
 
 
-def measure_CPU2(graph_type):
+def get_graph_Data(graph_type):
     global graph_Data
     if(len(graph_Data[0])>30):
         for i in range(len(graph_Data)):
@@ -72,4 +76,42 @@ def measure_CPU2(graph_type):
         return [graph_Data[0],graph_Data[4]]
     elif(graph_type=="gpu"):
         return [graph_Data[0],graph_Data[5]]
+
+def graph_cpu(graph_type):
+    fig=plt.figure(figsize=(9, 8))
+    plt.xlabel("time")
+    plt.xticks(rotation=45)
+
+    if(graph_type=="temp"):
+        plt.title('temperature')
+        plt.ylabel("temperature [℃]")
+    elif(graph_type=="clock"):
+        plt.title('clock')
+        plt.ylabel("clock [GHz]")
+    elif(graph_type=="volt"):
+        plt.title('volt')
+        plt.ylabel("volt [v]")
+    elif(graph_type=="arm"):
+        plt.title('arm')
+        plt.ylabel("arm [MB]")
+    elif(graph_type=="gpu"):
+        plt.title('gpu')
+        plt.ylabel("gpu [MB]")
+    try:
+        Data=get_graph_Data(graph_type)
+        plt.plot(Data[0],Data[1])
+        # canvasにプロットした画像を出力
+        canvas=FigureCanvasAgg(fig)
+        png_output=BytesIO()
+        canvas.print_png(png_output)
+        data=png_output.getvalue()
+        # HTML側に渡すレスポンスを生成する
+        response=make_response(data)
+        response.headers['Content-Type']='image/png'
+        response.headers['Content-Length']=len(data)
+        return response
+    except:
+        flash("graph error")
+        update_CPU()
+        graph_cpu(graph_type)    
 
