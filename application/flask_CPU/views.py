@@ -62,9 +62,11 @@ def graph():
 @cpu.route("/weather",methods=["GET","POST"])
 def weather_view():
     new_pref_num=request.args.get("new_pref_num")
+    region=request.args.get("region")
+    print(new_pref_num)
     if(new_pref_num is not None):
         weather.change_pref(new_pref_num)
         return redirect(url_for("cpu.weather_view"))
     info=weather.get_weather()
-    return render_template("weather.html", Data=info[0], Forecast=info[1])
+    return render_template("weather.html", Data=info[0], Forecast=info[1],region=region)
     
