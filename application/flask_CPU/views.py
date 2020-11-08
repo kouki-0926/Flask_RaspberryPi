@@ -35,5 +35,8 @@ def weather_view():
     
 @cpu.route("/ip_address",methods=["GET","POST"])
 def ip_address_view():
-    Data=ip.get_location("8.8.8.8")
+    Data=ip.get_location()
+    if(Data[0]=="error: True"):
+        Data[0]="ERROR"
+        flash("error")
     return render_template("ip_address.html",Data=Data)
