@@ -33,3 +33,7 @@ def weather_view():
     info=weather.get_weather()
     return render_template("weather.html", Data=info[0], Forecast=info[1],region=region)
     
+@cpu.route("/ip_address",methods=["GET","POST"])
+def ip_address_view():
+    Data=ip.get_location("8.8.8.8")
+    return render_template("ip_address.html",Data=Data)
