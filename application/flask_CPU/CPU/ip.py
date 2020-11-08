@@ -2,18 +2,18 @@ import requests
 
 def get_location():
     try:
-        Data=[]
+        Data = []
         url = "https://ipapi.co/json/"
         data = requests.get(url).json()
 
         #0
-        Data.append("ip: {}".format(data["ip"]))
+        Data.append("{}".format(data["ip"]))
         #1~5
-        Data.append("version: {}".format(data["version"]))
-        Data.append("city: {}".format(data["city"]))
-        Data.append("region: {}".format(data["region"]))
+        Data.append("{}".format(data["version"]))
+        Data.append("{}".format(data["city"]))
+        Data.append("{}".format(data["region"]))
         Data.append("region_code: {}".format(data["region_code"]))
-        Data.append("country: {}".format(data["country"]))
+        Data.append("{}".format(data["country"]))
         #6~10
         Data.append("country_name: {}".format(data["country_name"]))
         Data.append("country_code: {}".format(data["country_code"]))
@@ -36,13 +36,14 @@ def get_location():
         Data.append("asn: {}".format(data["asn"]))
         Data.append("org: {}".format(data["org"]))
     except:
-        Data=[]
+        Data = []
         Data.append("error: {}".format(data["error"]))
         Data.append("reason: {}".format(data["reason"]))
         Data.append("{}".format(data["message"]))
     return Data
 
-if __name__=="__main__":
-    Data=get_location()
+
+if __name__ == "__main__":
+    Data = get_location()
     for i in range(len(Data)):
         print(Data[i])
