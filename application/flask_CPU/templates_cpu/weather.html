@@ -4,12 +4,13 @@
 <br>
 <!-- 時計の表示 -->
 <h4 id="RealtimeClock" class="left"></h4>
-<script src="static_cpu/js/RealtimeClock.js"></script>
+<script src="static_cpu/js/RealTimeClock.js"></script>
 
 <div class="right">
   <!-- 地方選択 -->
   <select id="region_id">
     <option value="">地方を選択してください</option>
+    <optgroup label="地方選択">
     {% if region=="北海道" %}
     <option value="北海道" selected>北海道</option>
     {% elif region!="北海道" %}
@@ -57,6 +58,7 @@
     {% elif region!="九州・沖縄" %}
     <option value="九州・沖縄">九州・沖縄</option>
     {% endif %}
+    </optgroup>
   </select>
 
   <script>

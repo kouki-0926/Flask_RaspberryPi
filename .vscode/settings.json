@@ -3,13 +3,14 @@
    "editor.minimap.enabled": false,
 
  // raspberry pi
-   // "window.zoomLevel": 1.2,
-   // "editor.fontSize": 15,
-
- // windows
    "window.zoomLevel": 1.0,
-   "editor.fontSize": 17,
+   "editor.fontSize": 16,
+
+ // windows10
+  //  "window.zoomLevel": 1.0,
+  //  "editor.fontSize": 15,
     
  // ipad
+   //  "window.zoomLevel": 1.0,
    // "editor.fontSize": 18,
 }

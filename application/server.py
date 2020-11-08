@@ -23,5 +23,5 @@ app.register_blueprint(cpu,url_prefix="/flask_CPU")
 
 if __name__=="__main__":
     update_weather()
-    app.run()
-    # app.run("0.0.0.0",port=5000)
+    # app.run()
+    app.run("0.0.0.0",port=5000)
