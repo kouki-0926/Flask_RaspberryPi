@@ -1,9 +1,10 @@
 import requests
+from flask import flash
 
-def get_location():
+def get_location(ip_address):
     try:
         Data = []
-        url = "https://ipapi.co/json/"
+        url = "https://ipapi.co/"+str(ip_address)+"/json/"
         data = requests.get(url).json()
 
         #0
@@ -37,13 +38,15 @@ def get_location():
         Data.append("org: {}".format(data["org"]))
     except:
         Data = []
-        Data.append("error: {}".format(data["error"]))
+        Data.append("ERROR")
+        flash("IPアドレスの情報取得失敗")
+        # Data.append("error: {}".format(data["error"]))
         Data.append("reason: {}".format(data["reason"]))
         Data.append("{}".format(data["message"]))
     return Data
 
 
 if __name__ == "__main__":
-    Data = get_location()
+    Data = get_location("8.8.8.8")
     for i in range(len(Data)):
         print(Data[i])

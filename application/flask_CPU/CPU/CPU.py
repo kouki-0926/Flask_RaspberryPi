@@ -1,6 +1,6 @@
 from matplotlib.backends.backend_agg import FigureCanvasAgg
 import matplotlib.pyplot as plt
-from flask import make_response,flash
+from flask import make_response
 from subprocess import getoutput
 from io import BytesIO
 import datetime
@@ -13,7 +13,6 @@ def get_display_Data():
     return display_Data
 
 def update_CPU():
-    print("update cpu")
     global display_Data
     display_Data=[]
     display_Data.append(nowtime())
@@ -97,7 +96,6 @@ def graph_cpu(graph_type):
     elif(graph_type=="gpu"):
         plt.title('gpu')
         plt.ylabel("gpu [MB]")
-        
     try:
         Data=get_graph_Data(graph_type)
         plt.plot(Data[0],Data[1])
