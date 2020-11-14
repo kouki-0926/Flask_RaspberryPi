@@ -40,7 +40,7 @@ def measure():
 def graph_temp():
     global graph_Data
     try:
-        if(len(graph_Data)>=20):
+        if(len(graph_Data[0])>=20):
             graph_Data[0]=graph_Data[0][1:]
             graph_Data[1]=graph_Data[1][1:]
 
