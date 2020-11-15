@@ -5,12 +5,15 @@ temp=Blueprint("temp",__name__,template_folder='templates_temp',static_folder="s
 
 @temp.route("/")
 def index_view():
-    return redirect(url_for("temp.measure_view"))
+    return render_template("index_temp.html")
 
 @temp.route("/measure")
 def measure_view():
-    Data=pys.measure()
-    return render_template("measure_temp.html",time=Data[0],temperature=Data[1][0],humidity=Data[1][1])
+    try:
+        Data=pys.measure()
+        return render_template("measure_temp.html",time=Data[0],temperature=Data[1][0],humidity=Data[1][1])
+    except:
+        return redirect(url_for(measure_view))
 
 @temp.route("/graph_temp")
 def graph_temp_view():
