@@ -1,13 +1,13 @@
 from flask import redirect,url_for,render_template,flash,Blueprint
-from flask_temperature.Arduino import pyserial as pys
+from flask_arduino.Arduino import pyserial as pys
 
-temp=Blueprint("temp",__name__,template_folder='templates_temp',static_folder="static_temp")
+arduino=Blueprint("arduino",__name__,template_folder='templates_arduino',static_folder="static_arduino")
 
-@temp.route("/")
+@arduino.route("/")
 def index_view():
-    return render_template("index_temp.html")
+    return render_template("index_arduino.html")
 
-@temp.route("/measure")
+@arduino.route("/measure")
 def measure_view():
     try:
         Data=pys.measure()
@@ -15,6 +15,6 @@ def measure_view():
     except:
         return redirect(url_for(measure_view))
 
-@temp.route("/graph_temp")
+@arduino.route("/graph_temp")
 def graph_temp_view():
     return pys.graph_temp()
