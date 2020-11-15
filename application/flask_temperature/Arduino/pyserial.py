@@ -18,13 +18,18 @@ def init():
 graph_Data=[[],[]]
 def measure():
     global graph_Data
+    Data=[]
     try:
         ser.write(b'm')
     except:
-        init()    
-    Data=[]
-    date=str(datetime.datetime.now()).split(".")
-    Data.append(date[0])
+        init()  
+
+    date=datetime.datetime.now()
+    display_date=str(date).split(".")
+    Data.append(display_date[0])
+    graph_date=date.strftime("%H:%M:%S")
+    graph_Data[0].append(graph_date)
+  
     tmp_Data=[]
     for count in range(2):
         data=ser.readline()
@@ -32,22 +37,22 @@ def measure():
         data=data.decode("utf-8")
         tmp_Data.append(float(data))
     Data.append(tmp_Data)
-
-    graph_Data[0].append(Data[0])
-    graph_Data[1].append(Data[1][0]) 
+    graph_Data[1].append(tmp_Data[0])
     return Data
 
 def graph_temp():
     global graph_Data
     try:
+        if(len(graph_Data[0])!=len(graph_Data[1])):
+            graph_Data=[[],[]]
         if(len(graph_Data[0])>=20):
             graph_Data[0]=graph_Data[0][1:]
             graph_Data[1]=graph_Data[1][1:]
 
-        fig=plt.figure(figsize=(9,5))
+        fig=plt.figure(figsize=(7,8))
         plt.title('temperature')
         plt.xlabel("time")
-        plt.xticks(rotation=45)      
+        plt.xticks(rotation=60)      
         plt.ylabel("temperature [℃]")
 
         plt.plot(graph_Data[0],graph_Data[1])
