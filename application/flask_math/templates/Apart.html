@@ -16,5 +16,12 @@
 
 <br><br><br>
 
-<img src="https://chart.apis.google.com/chart?cht=tx&chl={{anser}}" alt="Error" width="500" height="auto"></img>
+{% if init_flag==0 %}
+  {% if anser!="Error" %}
+    <img src="https://chart.apis.google.com/chart?cht=tx&chl={{anser}}" width="45%" height="auto"></img>
+  {% else %}
+   <h3>Error</h3>
+  {% endif %}
+{% endif %}
+
 {% endblock %}

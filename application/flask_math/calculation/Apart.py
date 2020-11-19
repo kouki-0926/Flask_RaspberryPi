@@ -1,4 +1,5 @@
 from sympy import apart,Symbol
+from flask import flash
 from flask_math.calculation.common.STR import LATEX
 
 x=Symbol('x')
