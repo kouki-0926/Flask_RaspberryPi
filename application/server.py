@@ -22,5 +22,5 @@ app.register_blueprint(cpu,url_prefix="/flask_CPU")
 app.register_blueprint(arduino,url_prefix="/flask_arduino")
 
 if __name__=="__main__":
-    # app.run()
-    app.run("0.0.0.0",port=5000)
+    app.run()
+    # app.run("0.0.0.0",port=5000)
