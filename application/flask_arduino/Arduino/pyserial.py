@@ -14,8 +14,13 @@ def init():
         flash("pyserial was initialized")
         ser=serial.Serial("/dev/ttyACM0",9600)
         
-
 graph_Data=[[],[]]
+       
+def reset_graph_Data():
+    global graph_Data
+    graph_Data = [[], []]
+    print("graph_Data was initialized")
+
 def measure():
     global graph_Data
     Data=[]
