@@ -1,5 +1,10 @@
 {% extends "layout.html" %}
 
+{% block script %}
+
+{% endblock %}
+
+
 {% block body %}
 <h2><a href="{{url_for('Math.Apart_view')}}" class="heading">部分分数分解</a></h2>
 <br>
@@ -7,18 +12,18 @@
 <form action='{{url_for("Math.Apart_view")}}' method="post" enctype="multipart/form-data">
   <div class="form-group">
     <label for="InputFormula">式を入力してください</label>
-    <input type="text" name="formula" class="form-control" id="InputFormula" value="{{formula}}" placeholder="formula">
-  </div>
+    <input type="text" name="formula" class="form-control" id="InputFormula" value="{{formula}}" placeholder="formula" onKeyUp="addValue()">
+  </div><br>
 
-  <br>
   <button type="submit" class="btn btn-primary btn-block">計算</button>
-</form>
+</form><br>
 
-<br><br><br>
+<script src="static/js/latex.js"></script>
+<img id="wrapper"></img><br><br><br>
 
 {% if init_flag==0 %}
   {% if anser!="Error" %}
-    <img src="https://chart.apis.google.com/chart?cht=tx&chl={{anser}}" width="45%" height="auto"></img>
+    <img src="https://chart.apis.google.com/chart?cht=tx&chl={{anser}}"></img>
   {% else %}
    <h3>Error</h3>
   {% endif %}
