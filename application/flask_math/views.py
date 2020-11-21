@@ -69,11 +69,10 @@ def derivative_view():
     if request.method=="POST":
         formula=request.form.get("formula")
         type=request.form.get("type")
-        anser=derivative.derivative(formula,type)
-        return render_template("derivative.html",
-        formula=formula,type=type,anser_0=anser[0],anser_1=anser[1],anser_2=anser[2],anser_3=anser[3])
+        Anser=derivative.derivative(formula,type)
+        return render_template("derivative.html",formula=formula,type=type,Anser=Anser,init_flag=0)
     else:
-        return render_template("derivative.html",type="x")
+        return render_template("derivative.html",type="x",init_flag=1)
 
 
 @Math.route("/diff_equation",methods=["GET","POST"])
@@ -148,9 +147,9 @@ def Expand_view():
     if request.method=="POST":
         formula=request.form.get("formula")
         anser=Expand.Expand(formula)
-        return render_template("Expand.html",formula=formula,anser=anser)
+        return render_template("Expand.html",formula=formula,anser=anser,init_flag=0)
     else:
-        return render_template("Expand.html")
+        return render_template("Expand.html",init_flag=1)
 
 
 @Math.route("/Factorial",methods=["GET","POST"])
