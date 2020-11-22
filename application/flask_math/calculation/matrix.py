@@ -1,6 +1,7 @@
 from sympy import *
 from flask import flash
 from flask_math.calculation.common.MATRIX import MATRIX
+from flask_math.calculation.common.STR import LATEX
 
 def calculation(matrixA,Ar,Ac,type):
     try:
@@ -93,5 +94,22 @@ def calculation(matrixA,Ar,Ac,type):
         type=""
         output_type="NUMBER"
         flash("エラー：もう一度入力してください")
-    Anser=[anser,anser_r,anser_c,type,output_type]
+
+    if(output_type=="MATRIX"):
+        anser_2=[]
+        for i in range(anser_r):
+            A=anser.row(i)
+            anser_2.append([])
+            for j in range(anser_c):
+                anser_2[i].append(A[j])
+        
+        anser_3 = "\\begin{pmatrix} "
+        for i in range(anser_r):
+            anser_3+=LATEX(anser_2[i][0])
+            for j in range(anser_c-1):
+                anser_3+="&"+LATEX(anser_2[i][j+1])
+                anser_3+=" \\"+"\ "
+        anser_3+=" \end{pmatrix}"
+
+    Anser=[anser_3,anser_r,anser_c,type,output_type]
     return Anser

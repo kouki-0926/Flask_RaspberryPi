@@ -169,26 +169,20 @@
 
   <br>
   <button type="submit" class="btn btn-primary btn-block">計算</button>
-</form>
+</form><br>
 
-<br><br><br>
-<div class="inline">
-  <div>
-    <h1>
-      <math>
-        <mn>{{anser_3}}</mn>
-      </math>
-    </h1>
-  </div>
-  <div>
-    {% for anser in anser_0 %}
-    <h1>
-      <math>
-        <mn>{{anser}}</mn>
-      </math>
-    </h1>
-    {% endfor %}
-  </div>
+
+{% if init_flag==0 %}
+<h4 class="latex">\[{{Anser[0]}}\]</h4>
+
+<br><br>
+<div class="center">
+  <h5>latex</h5>
+  <h5 class="latex" id="targetID">{{Anser[0]}}</h5>
+  <br>
+  <button class="btn btn-outline-success" onclick="copy()">コピー</button>
+  <script src="static/js/copy.js"></script>
 </div>
+{% endif %}
 
 {% endblock %}
