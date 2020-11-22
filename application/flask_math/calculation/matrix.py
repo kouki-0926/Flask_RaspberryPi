@@ -7,15 +7,14 @@ def calculation(matrixA,Ar,Ac,type):
     try:
         Ar,Ac=[int(Ar),int(Ac)]
         A=MATRIX(matrixA,Ar,Ac)
-        type=type+" = "
 
-        if type=="A = ":
+        if type=="A":
             anser=A
             anser_r=Ar
             anser_c=Ac
             output_type="MATRIX"
 
-        elif type=="A^n = ":
+        elif type=="A^n":
             A=list(A.diagonalize())
             P=A[0]
             D=A[1]
@@ -26,53 +25,44 @@ def calculation(matrixA,Ar,Ac,type):
             anser_c=Ac
             output_type="MATRIX"
 
-        elif type=="A^t = ":
+        elif type=="A^t":
             anser=A.transpose()
             anser_r=Ac
             anser_c=Ar
             output_type="MATRIX"
 
-        elif type=="A^-1 = ":
+        elif type=="A^{-1}":
             anser=A.inv()
             anser_r=Ar
             anser_c=Ac
             output_type="MATRIX"
 
-        elif type=="A~ = ":
+        elif type=="\widetilde{A}":
             anser=A.adjugate()
             anser_r=Ar
             anser_c=Ac
             output_type="MATRIX"
 
-        elif type=="det(A) = ":
-            anser=[A.det()]
-            anser_r=Ar
-            anser_c=Ac
+        elif type=="det(A)":
+            anser=A.det()
             output_type="NUMBER"
 
-        elif type=="rank(A) = ":
-            anser=[A.rank()]
-            anser_r=Ar
-            anser_c=Ac
+        elif type=="rank(A)":
+            anser=A.rank()
             output_type="NUMBER"
 
-        elif type=="tr(A) = ":
-            anser=[A.trace()]
-            anser_r=Ar
-            anser_c=Ac
+        elif type=="tr(A)":
+            anser=A.trace()
             output_type="NUMBER"
 
-        elif type=="λ = ":
+        elif type=="λ":
             A=A.eigenvals()
-            anser=[]
+            anser=""
             for B in A.items():
-                anser.append("λ="+str(B[0])+" (重複度="+str(B[1])+")")
-            anser_r=Ar
-            anser_c=Ac
-            type=""
+                anser+=LATEX(B[0])+"(重複度="+LATEX(B[1])+"), "
             output_type="NUMBER"
 
-        elif type=="P = ":
+        elif type=="P":
             A=A.diagonalize()
             A=list(A)
             anser=A[0]
@@ -80,7 +70,7 @@ def calculation(matrixA,Ar,Ac,type):
             anser_c=Ac
             output_type="MATRIX"
 
-        elif type=="P^-1AP = ":
+        elif type=="P^{-1}AP":
             A=A.diagonalize()
             A=list(A)
             anser=A[1]
@@ -88,10 +78,7 @@ def calculation(matrixA,Ar,Ac,type):
             anser_c=Ac
             output_type="MATRIX"
     except:
-        anser=["Error"]
-        anser_r=""
-        anser_c=""
-        type=""
+        anser="Error"
         output_type="NUMBER"
         flash("エラー：もう一度入力してください")
 
@@ -103,13 +90,14 @@ def calculation(matrixA,Ar,Ac,type):
             for j in range(anser_c):
                 anser_2[i].append(A[j])
         
-        anser_3 = "\\begin{pmatrix} "
+        anser_3="\\begin{pmatrix} "
         for i in range(anser_r):
             anser_3+=LATEX(anser_2[i][0])
             for j in range(anser_c-1):
                 anser_3+="&"+LATEX(anser_2[i][j+1])
                 anser_3+=" \\"+"\ "
         anser_3+=" \end{pmatrix}"
+    elif(output_type=="NUMBER"):
+        anser_3=anser
 
-    Anser=[anser_3,anser_r,anser_c,type,output_type]
-    return Anser
+    return anser_3

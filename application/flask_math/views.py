@@ -268,8 +268,8 @@ def matrix_view():
         Ar=request.form.get("Ar")
         Ac=request.form.get("Ac")
         type=request.form.get("type")
-        Anser=matrix.calculation(matrixA,Ar,Ac,type)
-        return render_template("matrix.html",matrix=matrixA,Ar=Ar,Ac=Ac,type=type,Anser=Anser,init_flag=0)
+        anser=matrix.calculation(matrixA,Ar,Ac,type)
+        return render_template("matrix.html",matrix=matrixA,Ar=Ar,Ac=Ac,type=type,anser=anser,init_flag=0)
     else:
         return render_template("matrix.html",Ar=2,Ac=2,type="A",init_flag=1)
 
