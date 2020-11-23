@@ -12,15 +12,28 @@
 
   <br>
   <button type="submit" class="btn btn-primary btn-block">計算</button>
-</form>
+</form><br>
 
-<br><br><br>
-{% for anser in Anser %}
-<h2>
-  <math>
-    <mn>{{anser}}</mn>
-  </math>
-</h2>
-{% endfor %}
+{% if init_flag==0 %}
+
+<div class="center">
+  {% for anser in Anser %}
+  <h5 class="latex">{{anser}}</h5>
+  {% endfor %}
+</div>
+
+<br><br>
+<div class="center">
+  <h5>\(\LaTeX\)</h5>
+  <h5 class="latex" id="targetID">
+    {% for anser in Anser %}
+    <pre>{{anser}}</pre>
+    {% endfor %}
+  </h5>
+  <br>
+  <button class="btn btn-outline-success" onclick="copy()">コピー</button>
+  <script src="static/js/copy.js"></script>
+</div>
+{% endif %}
 
 {% endblock %}
