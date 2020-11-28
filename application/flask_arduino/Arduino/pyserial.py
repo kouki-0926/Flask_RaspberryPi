@@ -21,7 +21,7 @@ def reset_graph_Data():
     graph_Data = [[], []]
     print("graph_Data was initialized")
 
-def measure():
+def measure_temp():
     global graph_Data
     Data=[]
     try:

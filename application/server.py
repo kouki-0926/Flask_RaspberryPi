@@ -1,16 +1,19 @@
 from apscheduler.schedulers.background import BackgroundScheduler
+from flask import Flask
 import sys
 sys.dont_write_bytecode = True
-from flask import Flask
 
 from flask_CPU.CPU.CPU import update_CPU
+from flask_arduino.Arduino.pyserial import measure_temp
+
+from main.views import main
 from flask_math.views import Math
 from flask_CPU.views import cpu
 from flask_arduino.views import arduino
-from main.views import main
 
 sched = BackgroundScheduler(standalone=True, coalesce=True)
 sched.add_job(update_CPU,'interval',minutes=10)
+sched.add_job(measure_temp,'interval',minutes=10)
 sched.start()
 
 app=Flask(__name__)
