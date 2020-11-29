@@ -51,16 +51,23 @@
 }
 
 .wrapper {
-	min-height: 100vh;
-	position: relative;
-	padding-bottom: 250px;
-	box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .footer {
-  width: 100%;
+  margin-top: auto;
   background-color: darkgray;
   padding: 15px 0;
-	position: absolute;
-	bottom: 0;
+}
+
+.footer_ul{
+  column-count:6;
+}
+
+@media only screen and (max-device-width: 480px) {
+  .footer_ul{
+    column-count:2;
+  }
 }
