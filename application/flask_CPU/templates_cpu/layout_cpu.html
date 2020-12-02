@@ -71,15 +71,15 @@
 
     <!-- フッター -->
     <footer class="footer">
+      <ul class="footer_ul">
+        <a style="display: block;" class="heading" href="{{ url_for('main.index_view')}}"><small>TopPage</small></a>
+        <a style="display: block;" class="heading" href="{{ url_for('cpu.index_view')}}"><small>index</small></a>
+        <a style="display: block;" class="heading" href="{{ url_for('cpu.measure_view',graph_type='temp')}}"><small>CPU</small></a>
+        <a style="display: block;" class="heading" href="{{ url_for('cpu.weather_view')}}"><small>weather</small></a>
+        <a style="display: block;" class="heading" href="{{ url_for('cpu.ip_address_view')}}"><small>IP_address</small></a>
+      </ul>
+
       <div class="center">
-        <div class="footer_ul">
-          <a style="display: block;" class="heading" href="{{ url_for('main.index_view')}}"><small>TopPage</small></a>
-          <a style="display: block;" class="heading" href="{{ url_for('cpu.index_view')}}"><small>index</small></a>
-          <a style="display: block;" class="heading" href="{{ url_for('cpu.measure_view',graph_type='temp')}}"><small>CPU</small></a>
-          <a style="display: block;" class="heading" href="{{ url_for('cpu.weather_view')}}"><small>weather</small></a>
-          <a style="display: block;" class="heading" href="{{ url_for('cpu.ip_address_view')}}"><small>IP_address</small></a>
-        </div>
-    
         <small>&copy; 2020-<span id="thisYear"></span> Koki</small>
         <script type="text/javascript">
           date = new Date();
