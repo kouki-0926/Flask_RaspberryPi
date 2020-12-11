@@ -65,14 +65,21 @@
   column-count:5;
 }
 
-.footer_ul_2{
+.footer_ul_ip{
   column-count:3;
 }
 
+.footer_ul_weather{
+  column-count:2;
+}
+
 @media only screen and (max-device-width: 480px) {
-  .footer_ul,.footer_ul_2{
+  .footer_ul{
     column-count:2;
-  }  
+  } 
+  .footer_ul_ip,.footer_ul_weather{
+    column-count:1;
+  } 
   .split,.split2{
     width: 100%;
   }
