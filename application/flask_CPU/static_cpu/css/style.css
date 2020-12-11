@@ -31,6 +31,22 @@
   text-align: center;
 }
 
+.overflow {
+  white-space: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.split{
+  display: inline-block; 
+  width: 50%;
+}
+
+.split2{
+  display: inline-block; 
+  float:right;
+  width: 50%;
+}
 
 /* footer */
 .wrapper {
@@ -49,8 +65,16 @@
   column-count:5;
 }
 
+.footer_ul_2{
+  column-count:3;
+}
+
 @media only screen and (max-device-width: 480px) {
-  .footer_ul{
+  .footer_ul,.footer_ul_2{
     column-count:2;
+  }  
+  .split,.split2{
+    width: 100%;
   }
 }
+
