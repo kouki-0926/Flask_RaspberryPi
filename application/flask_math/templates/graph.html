@@ -2,15 +2,32 @@
 
 {% block body %}
 <h2 class="left">
-  <a href="{{url_for('Math.graph_view')}}" class="heading">グラフ</a>
-</h2><br><br>
+  <a href="{{url_for('Math.graph_view',type='re')}}" class="heading">グラフ</a>
+</h2>
+<div class="right">
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"　aria-haspopup="true" aria-expanded="false">
+      選択してください
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" href="{{url_for('Math.graph_view',type='re')}}">実関数</a>
+      <a class="dropdown-item" href="{{url_for('Math.graph_view',type='im')}}">複素関数</a>
+    </div>
+  </div>
+</div>
 
-<form action='{{url_for("Math.graph_view")}}' method="post" enctype="multipart/form-data">
+<br><br><br>
+
+<form action="{{url_for('Math.graph_view',type=type)}}" method="post" enctype="multipart/form-data">
   <div class="form-group">
     <label for="InputFormula_1">式を入力してください</label>
     <div class="input-group">
       <div class="input-group-prepend">
+        {% if type=="re" %}
         <span class="input-group-text" id="basic-addon1">f(x)=</span>
+        {% elif type=="im" %}
+        <span class="input-group-text" id="basic-addon1">z(x,y)=</span>
+        {% endif %}
       </div>
       <input type="text" name="formula_1" class="form-control" id="InputFormula_1" value="{{formula_1}}" placeholder="formula_1">
     </div>
@@ -20,12 +37,12 @@
   <div class="form-row align-items-center">
     <div class="col-6">
       <div class="input-group">
-        <input type="text" name="lower_end_x" class="form-control" value="{{lower_end_x}}" placeholder="lower_end_x" aria-describedby="basic-addon2">
+        <input type="text" name="lower_end_x" class="form-control" value="{{lower_end_x}}" placeholder="lower_end_x"　aria-describedby="basic-addon2">
       </div>
     </div>
     <div class="col-6">
       <div class="input-group">
-        <input type="text" name="upper_end_x" class="form-control" value="{{upper_end_x}}" placeholder="upper_end_x" aria-describedby="basic-addon2">
+        <input type="text" name="upper_end_x" class="form-control" value="{{upper_end_x}}" placeholder="upper_end_x"　aria-describedby="basic-addon2">
       </div>
     </div>
   </div>
@@ -34,8 +51,9 @@
   <button type="submit" class="btn btn-primary btn-block">描画</button>
 </form>
 
+
 {% if init_flag==0 %}
-<img src="{{url_for('Math.graph_png',formula_1=formula_1,lower_end_x=lower_end_x,upper_end_x=upper_end_x)}}" class="graph"></img>
+<img src="{{url_for('Math.graph_png',formula_1=formula_1,lower_end_x=lower_end_x,upper_end_x=upper_end_x,type=type)}}" class="graph"></img>
 {% endif %}
 
 {% endblock %}
