@@ -17,12 +17,12 @@ def init():
         except:
             print("pyserial cannot be initialized")
         
-graph_Data=[[],[]]
+graph_Data=[[],[],[]]
        
 def reset_graph_Data():
     global graph_Data,ser
     ser=0
-    graph_Data = [[], []]
+    graph_Data = [[], [], []]
     print("graph_Data was initialized")
 
 def measure_temp():
@@ -45,13 +45,14 @@ def measure_temp():
             tmp_Data.append(float(data))
         Data.append(tmp_Data)
         graph_Data[1].append(tmp_Data[0])
+        graph_Data[2].append(tmp_Data[1])
         
         return Data    
     except:
         init()  
 
 
-def graph_temp():
+def graph_temp(graph_type):
     global graph_Data
     try:
         if(len(graph_Data[0])!=len(graph_Data[1])):
@@ -59,14 +60,21 @@ def graph_temp():
         if(len(graph_Data[0])>=20):
             graph_Data[0]=graph_Data[0][1:]
             graph_Data[1]=graph_Data[1][1:]
+            graph_Data[2]=graph_Data[2][1:]
 
         fig=plt.figure(figsize=(7,8))
-        plt.title('temperature')
         plt.xlabel("time")
-        plt.xticks(rotation=60)      
-        plt.ylabel("temperature [℃]")
+        plt.xticks(rotation=60)  
 
-        plt.plot(graph_Data[0],graph_Data[1])
+        if(graph_type=="temp"):
+            plt.title('temperature')
+            plt.ylabel("temperature [℃]")
+            plt.plot(graph_Data[0],graph_Data[1])
+        elif(graph_type=="humi"):
+            plt.title('humidity')
+            plt.ylabel("humidity [%]")
+            plt.plot(graph_Data[0],graph_Data[2])
+        
         # canvasにプロットした画像を出力
         canvas=FigureCanvasAgg(fig)
         png_output=BytesIO()
