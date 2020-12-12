@@ -1,9 +1,17 @@
 {% extends "layout.html" %}
 
 {% block body %}
+
+{% if type=="re" %}
 <h2 class="left">
-  <a href="{{url_for('Math.graph_view',type='re')}}" class="heading">グラフ</a>
+  <a href="{{url_for('Math.graph_view',type='re')}}" class="heading">グラフ(実関数)</a>
 </h2>
+{% elif type=="im" %}
+<h2 class="left">
+  <a href="{{url_for('Math.graph_view',type='im')}}" class="heading">グラフ(複素関数)</a>
+</h2>
+{% endif %}
+
 <div class="right">
   <div class="dropdown">
     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"　aria-haspopup="true" aria-expanded="false">
@@ -23,11 +31,7 @@
     <label for="InputFormula_1">式を入力してください</label>
     <div class="input-group">
       <div class="input-group-prepend">
-        {% if type=="re" %}
         <span class="input-group-text" id="basic-addon1">f(x)=</span>
-        {% elif type=="im" %}
-        <span class="input-group-text" id="basic-addon1">z(x,y)=</span>
-        {% endif %}
       </div>
       <input type="text" name="formula_1" class="form-control" id="InputFormula_1" value="{{formula_1}}" placeholder="formula_1">
     </div>
@@ -54,6 +58,11 @@
 
 {% if init_flag==0 %}
 <img src="{{url_for('Math.graph_png',formula_1=formula_1,lower_end_x=lower_end_x,upper_end_x=upper_end_x,type=type)}}" class="graph"></img>
+
+{% if type=="im" %}
+<p class="center">入力された関数の実部を横軸、虚部を縦軸として直交座標系にプロットしてます</p>
+{% endif %}
+
 {% endif %}
 
 {% endblock %}

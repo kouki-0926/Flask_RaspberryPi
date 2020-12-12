@@ -242,7 +242,7 @@ def latex_view():
     if(request.method=="POST"):
         input_type=request.form.get("input_type")
         if(input_type=="python"):
-            formula_python=request.form.get("formula_python")        
+            formula_python=request.form.get("formula_python")
             anser=latex.latex(formula_python)
             return render_template("latex.html",formula_python=formula_python,anser=anser,input_type=input_type,init_flag=0)
         elif(input_type=="latex"):
