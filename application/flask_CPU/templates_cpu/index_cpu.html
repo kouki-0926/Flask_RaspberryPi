@@ -3,20 +3,23 @@
 {% block BODY %}
 <br><br>
 <div class="list-group">
-  <a class="list-group-item list-group-item-action" href="{{url_for('cpu.measure',graph_type='temp')}}">CPU</a>
+  <a class="list-group-item list-group-item-action" href="{{url_for('cpu.measure_view',graph_type='temp')}}">CPU</a>
 </div>
 <div class="list-group">
   <a class="list-group-item list-group-item-action" href="{{url_for('cpu.weather_view')}}">weather</a>
 </div>
+<div class="list-group">
+  <a class="list-group-item list-group-item-action" href="{{url_for('cpu.ip_address_view')}}">IP address</a>
+</div>
 <br><br>
 
 <nav aria-label="Page navigation">
-  <ul class="pagination justify-content-center  pagination-lg">
+  <ul class="pagination justify-content-center">
     <li class="page-item disabled">
       <a class="page-link" href="#">Previous</a>
     </li>
     <li class="page-item">
-      <a class="page-link" href="{{url_for('cpu.index')}}">1</a>
+      <a class="page-link" href="{{url_for('cpu.index_view')}}">1</a>
     </li>
     <li class="page-item disabled">
       <a class="page-link" href="#">　Next　</a>

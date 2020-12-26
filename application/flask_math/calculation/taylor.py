@@ -1,6 +1,6 @@
-from sympy import *
+from sympy import Symbol, sympify, diff, factorial
 from flask import flash
-from flask_math.calculation.common.STR import STR
+from flask_math.calculation.common.STR import LATEX
 
 x = Symbol('x')
 
@@ -13,12 +13,11 @@ def taylor(formula,dimension,center):
         for number in range(1,int(dimension)+1,1):
             f=diff(f)
             D=f.subs(x,center)/factorial(number)
-            A=D*(x-center)**number+A
+            A+=D*(x-center)**number
 
-        anser_1="f(x)="+STR(formula)
-        anser_2="f(x)≒"+STR(A)
+        anser_1="f(x)="+LATEX(formula)
+        anser_2="f(x)≒"+LATEX(A)
         Anser=[anser_1,anser_2]
-        print(Anser)
     except:
         Anser=["Error",""]
         flash("エラー：もう一度入力してください")
