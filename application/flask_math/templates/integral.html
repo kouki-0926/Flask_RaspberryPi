@@ -57,19 +57,39 @@
   </div>
   {% endif %}
 
+  <br>
   <!-- 演算の選択 -->
   <div class="center">
     <div class="radioArea" id="makeImg">
-      {% if dimension=="2D" %}
+    {% if dimension=="2D" %}
+      {% if type=="indefinite_integral" %}
       <input type="radio" name="type" id="r1" value="indefinite_integral" checked><label for="r1">不定積分</label>
-      <input type="radio" name="type" id="r2" value="multiple_integral_1"><label for="r2">定積分</label>
-      <input type="radio" name="type" id="r3" value="multiple_integral_2"><label for="r3">定積分(浮動小数点数)</label>
+      <input type="radio" name="type" id="r2" value="definite_integral_1"><label for="r2">定積分</label>
+      <input type="radio" name="type" id="r3" value="definite_integral_2"><label for="r3">定積分(浮動小数点数)</label>
+      {% elif type=="definite_integral_1" %}
+      <input type="radio" name="type" id="r1" value="indefinite_integral"><label for="r1">不定積分</label>
+      <input type="radio" name="type" id="r2" value="definite_integral_1" checked><label for="r2">定積分</label>
+      <input type="radio" name="type" id="r3" value="definite_integral_2"><label for="r3">定積分(浮動小数点数)</label>
+      {% elif type=="definite_integral_2" %}
+      <input type="radio" name="type" id="r1" value="indefinite_integral"><label for="r1">不定積分</label>
+      <input type="radio" name="type" id="r2" value="definite_integral_1"><label for="r2">定積分</label>
+      <input type="radio" name="type" id="r3" value="definite_integral_2" checked><label for="r3">定積分(浮動小数点数)</label>
       {% endif %}
+    {% elif dimension=="3D" %}
+      {% if type=="multiple_integral_1" %}
+      <input type="radio" name="type" id="r1" value="multiple_integral_1" checked><label for="r1">重積分</label>
+      <input type="radio" name="type" id="r2" value="multiple_integral_2"><label for="r2">重積分(浮動小数点数)</label>
+      {% elif type=="multiple_integral_2" %}
+      <input type="radio" name="type" id="r1" value="multiple_integral_1"><label for="r1">重積分</label>
+      <input type="radio" name="type" id="r2" value="multiple_integral_2" checked><label for="r2">重積分(浮動小数点数)</label>
+      {% endif %}
+    {% endif %}
     </div>
-  </div><br>
-<button type="submit" class="btn btn-primary btn-block">計算</button>
-</form><br>
-
+  </div>
+  <br>
+  <button type="submit" class="btn btn-primary btn-block">計算</button>
+</form>
+<br><br>
 
 {% if init_flag==0 %}
 <div class="center">
