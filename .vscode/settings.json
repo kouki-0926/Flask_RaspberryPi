@@ -5,6 +5,7 @@
   // raspberry pi
   "window.zoomLevel": 1.0,
   "editor.fontSize": 16,
+  "python.formatting.provider": "autopep8",
 
   // windows10
   //  "window.zoomLevel": 1.0,

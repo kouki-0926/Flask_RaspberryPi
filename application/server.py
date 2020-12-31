@@ -15,7 +15,6 @@ app.register_blueprint(Math, url_prefix="/flask_math")
 app.register_blueprint(cpu, url_prefix="/flask_CPU")
 app.register_blueprint(arduino, url_prefix="/flask_arduino")
 
-
 from apscheduler.schedulers.background import BackgroundScheduler
 from flask_arduino.Arduino.pyserial import measure_temp
 from flask_CPU.CPU.CPU import update_CPU
