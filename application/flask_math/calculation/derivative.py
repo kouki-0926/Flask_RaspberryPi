@@ -2,11 +2,10 @@ from sympy import symbols, diff, factor
 from flask import flash
 from flask_math.calculation.common.STR import LATEX
 
-x, y, z = symbols('x y z')
-
 
 def derivative(formula, type):
     try:
+        x, y, z = symbols('x y z')
         anser = "f_{" + type + "}="
         if (type == "x"):
             A = diff(formula, x)

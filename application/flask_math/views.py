@@ -1,7 +1,7 @@
 from flask import request, redirect, url_for, render_template, flash, Blueprint, make_response
 from flask_math.calculation import *
 
-Math = Blueprint("Math", __name__, template_folder='templates', static_folder="static")
+Math = Blueprint("Math", __name__, template_folder="templates", static_folder="static")
 
 
 @Math.route("/index")
@@ -72,7 +72,7 @@ def BMI_view():
 
 @Math.route("/derivative", methods=["GET", "POST"])
 def derivative_view():
-    if request.method == "POST":
+    if (request.method == "POST"):
         formula = request.form.get("formula")
         type = request.form.get("type")
         Anser = derivative.derivative(formula, type)

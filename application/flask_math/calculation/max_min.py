@@ -2,11 +2,10 @@ from sympy import *
 from flask import flash
 from flask_math.calculation.common.STR import LATEX
 
-x, y = symbols('x y')
-
 
 def max_min(formula):
     try:
+        x, y = symbols('x y')
         formula = sympify(formula)
         f_x = diff(formula, x)
         f_y = diff(formula, y)

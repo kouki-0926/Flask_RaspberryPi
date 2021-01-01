@@ -2,12 +2,11 @@ from sympy import Symbol, Function, sympify, dsolve
 from flask import flash
 from flask_math.calculation.common.STR import LATEX
 
-x = Symbol('x')
-y = Function('y')
-
 
 def diff_equation(formula):
     try:
+        x = Symbol('x')
+        y = Function('y')
         formula = sympify(formula)
         A = dsolve(formula)
         Anser = [LATEX(formula) + "=0"]

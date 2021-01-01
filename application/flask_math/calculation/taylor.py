@@ -2,11 +2,10 @@ from sympy import Symbol, sympify, diff, factorial
 from flask import flash
 from flask_math.calculation.common.STR import LATEX
 
-x = Symbol('x')
-
 
 def taylor(formula, dimension, center):
     try:
+        x = Symbol('x')
         f = sympify(formula)
         center = float(center)
 

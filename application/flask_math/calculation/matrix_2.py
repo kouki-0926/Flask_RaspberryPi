@@ -6,8 +6,7 @@ from flask_math.calculation.common.STR import LATEX
 
 def calculation(matrixA, matrixB, Ar, Ac, Br, Bc, type, k, l):
     try:
-        Ar, Ac, Br, Bc, k, l = [int(Ar), int(
-            Ac), int(Br), int(Bc), int(k), int(l)]
+        Ar, Ac, Br, Bc, k, l = [int(Ar), int(Ac), int(Br), int(Bc), int(k), int(l)]
         A = MATRIX(matrixA, Ar, Ac)
         B = MATRIX(matrixB, Br, Bc)
 
