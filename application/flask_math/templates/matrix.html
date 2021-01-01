@@ -45,14 +45,15 @@
       {% endif %}
 
       {% if type=="A^{-1}" %}
-      <input type="radio" name="type" id="r4" value="A^{-1}" checked><label for="r4"><small>\(A^{-1}\)</small></label>
+      <input type="radio" name="type" id="r3" value="A^{-1}" checked><label for="r3"><small>\(A^{-1}\)</small></label>
       {% else %}
-      <input type="radio" name="type" id="r4" value="A^{-1}"><label for="r4"><small>\(A^{-1}\)</small></label>
+      <input type="radio" name="type" id="r3" value="A^{-1}"><label for="r3"><small>\(A^{-1}\)</small></label>
       {% endif %}
+
       {% if type=="A^t" %}
-      <input type="radio" name="type" id="r3" value="A^t" checked><label for="r3">転置</label>
+      <input type="radio" name="type" id="r4" value="A^t" checked><label for="r4">転置</label>
       {% else %}
-      <input type="radio" name="type" id="r3" value="A^t"><label for="r3">転置</label>
+      <input type="radio" name="type" id="r4" value="A^t"><label for="r4">転置</label>
       {% endif %}
 
       {% if type=="\widetilde{A}" %}
