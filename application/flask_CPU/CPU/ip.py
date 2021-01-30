@@ -66,4 +66,5 @@ def get_location(ip_address):
 
 if __name__ == "__main__":
     Data = get_location("8.8.8.8")
-    print(Data)
+    for data in Data.values():
+        print(data)
