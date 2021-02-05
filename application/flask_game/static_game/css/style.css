@@ -1,6 +1,11 @@
 @charset "UTF-8";
+* {
+  font-family: "Mplus 1p";
+}
+
 .main_text {
-  text-align: center;
+  padding-top: 1.25em;
+  padding-bottom: 1.25em;
 }
 
 .heading:link, .heading:visited {
@@ -18,6 +23,7 @@
 }
 
 /* footer */
+
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -31,11 +37,55 @@
 }
 
 .footer_ul {
-  column-count: 2;
+  column-count: 3;
 }
 
 @media only screen and (max-device-width: 480px) {
   .footer_ul {
     column-count: 2;
   }
+}
+
+/* radioButton */
+.radioArea input[type="radio"] {
+  /* 大きさ：横 */
+  width: 13pt;
+  /* 大きさ：縦 */
+  height: 13pt;
+  /* 並び位置   */
+  vertical-align: top;
+  /* チェックボックス非表示 */
+  display: none;
+}
+
+/* --- チェックボックス直後のlabel --- */
+.radioArea input[type="radio"]+label {
+  /* labelの余白 */
+  padding: 0 10px;
+  /* labelの文字サイズ */
+  font-size: 13pt;
+  /* labelの枠線 */
+  border: 2px solid rgb(108, 117, 125);
+  /* labelの角丸 */
+  border-radius: 5px;
+  /* lebelの背景 */
+  background: #ffffff;
+  /* カーソル設定 */
+  cursor: pointer;
+  /* なめらか変化 */
+  transition: 0.2s;
+}
+
+/* --- 選択されたチェックボックス直後のlabel --- */
+.radioArea input[type="radio"]:checked+label {
+  color: #ffffff;
+  /* lebelの背景 */
+  background: rgb(108, 117, 125);
+}
+
+/* --- 選択されていないチェックボックス直後のlabelにマウスが乗った --- */
+.radioArea input[type="radio"]:not(:checked)+label:hover {
+  color: #ffffff;
+  /* lebelの背景 */
+  background: rgba(108, 117, 125, 0.4);
 }

@@ -1,0 +1,17 @@
+{% extends "layout_game.html" %}
+
+{% block BODY %}
+<h2><a href="{{url_for('game.jyanken_view')}}" class="heading">じゃんけん</a></h2>
+<br>
+
+<form action='{{url_for("game.jyanken_view")}}' method="post" enctype="multipart/form-data">
+    <div class="center">
+        <button type="button" class="btn btn-secondary">グー</button>
+        <button type="button" class="btn btn-secondary">チョキ</button>
+        <button type="button" class="btn btn-secondary">パー</button>
+    </div>
+</form><br>
+
+{{anser}}
+
+{% endblock %}
