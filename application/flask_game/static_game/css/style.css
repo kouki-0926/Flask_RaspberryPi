@@ -1,10 +1,6 @@
 @charset "UTF-8";
-.blog-body {
-  padding: 1.25em;
-}
-
-* {
-  font-family: "Mplus 1p";
+.main_text {
+  text-align: center;
 }
 
 .heading:link, .heading:visited {
@@ -35,7 +31,7 @@
 }
 
 .footer_ul {
-  column-count: 5;
+  column-count: 2;
 }
 
 @media only screen and (max-device-width: 480px) {
