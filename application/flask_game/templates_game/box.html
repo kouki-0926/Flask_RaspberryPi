@@ -32,20 +32,23 @@
     <br><br id="title">
 </div>
 <script>
-    const num = 8;
+    const num = 10;
     const winner = Math.floor(Math.random() * num);
+    let count = 1;
 
     for (let i = 0; i < num; i++) {
         const div = document.createElement("div");
         div.classList.add('box');
 
+
         div.addEventListener('click', () => {
             if (i === winner) {
-                div.textContent = 'Win!';
+                div.textContent = 'Win!' + count;
                 div.classList.add('win');
             } else {
                 div.textContent = 'Lose!';
                 div.classList.add('lose');
+                count++;
             }
         });
 
