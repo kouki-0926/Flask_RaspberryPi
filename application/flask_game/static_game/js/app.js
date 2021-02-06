@@ -10,7 +10,9 @@ var c = document.createElement("canvas");
 var ctx = c.getContext("2d");
 c.width = 1300;
 c.height = 400;
-document.div.appendChild(c);
+var parentDiv = document.getElementById("parent-div");
+var title = document.getElementById("title");
+parentDiv.insertBefore(c, title.nextSibling);
 
 
 // 画面生成のパラメータ生成

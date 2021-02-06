@@ -27,4 +27,4 @@ def box_view():
 
 @game.route("/bike")
 def bike_view():
-    return render_template("test006.html")
+    return render_template("bike.html")
