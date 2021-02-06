@@ -17,3 +17,8 @@ def jyanken_view():
         return render_template("jyanken.html", n=n, Anser=Anser)
     else:
         return render_template("jyanken.html", n=1)
+
+
+@game.route("/box")
+def box_view():
+    return render_template("box.html")
