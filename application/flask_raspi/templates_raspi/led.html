@@ -1,9 +1,9 @@
-{% extends "layout_raspberryPi.html" %}
+{% extends "layout_raspi.html" %}
 
 {% block SCRIPT %}
 <script type="text/javascript">
     function jumpPage() {
-        location.href = "{{url_for('raspberryPi.Blink_view')}}";
+        location.href = "{{url_for('raspi.Blink_view')}}";
     }
     setTimeout("jumpPage()", 1000)
 </script>
@@ -14,7 +14,7 @@
 <h2>Hello world!!</h2>
 <!-- 時計の表示
 <h4 id="RealtimeClock" class="left"></h4>
-<script src="static_raspberryPi/js/RealTimeClock.js"></script> -->
+<script src="static_raspi/js/RealTimeClock.js"></script> -->
 {% endblock %}
 
 

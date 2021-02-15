@@ -1,19 +1,19 @@
 from flask import redirect, request, url_for, render_template, flash, Blueprint
-from flask_raspberryPi.raspberryPi.raspberryPi import Blink
+from flask_raspi.raspi.raspi import Blink
 
-raspberryPi = Blueprint("raspberryPi", __name__, template_folder='templates_raspberryPi', static_folder="static_raspberryPi")
+raspi = Blueprint("raspi", __name__, template_folder='templates_raspi', static_folder="static_raspi")
 
 
-@raspberryPi.route("/")
+@raspi.route("/")
 def index_view():
-    return render_template("index_raspberryPi.html")
+    return render_template("index_raspi.html")
 
 
-@raspberryPi.route("/Blink", methods=["GET", "POST"])
+@raspi.route("/Blink", methods=["GET", "POST"])
 def Blink_view():
     Blink()
     return render_template("led.html")
     # try:
     # except:
     #     flash("Error")
-    #     return redirect(url_for("raspberryPi.index_view"))
+    #     return redirect(url_for("raspi.index_view"))
