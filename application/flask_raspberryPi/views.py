@@ -11,9 +11,9 @@ def index_view():
 
 @raspberryPi.route("/Blink", methods=["GET", "POST"])
 def Blink_view():
-    try:
-        Blink()
-        return render_template("raspberryPi.html")
-    except:
-        flash("Error")
-        return redirect(url_for("raspberryPi.index_view"))
+    Blink()
+    return render_template("led.html")
+    # try:
+    # except:
+    #     flash("Error")
+    #     return redirect(url_for("raspberryPi.index_view"))
