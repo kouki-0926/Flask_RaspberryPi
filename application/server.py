@@ -9,12 +9,14 @@ from main.views import main
 from flask_math.views import Math
 from flask_CPU.views import cpu
 from flask_arduino.views import arduino
+from Flask_raspberryPi.views import raspberryPi
 from flask_game.views import game
 
 app.register_blueprint(main)
-app.register_blueprint(Math, url_prefix="/flask_math")
-app.register_blueprint(cpu, url_prefix="/flask_CPU")
-app.register_blueprint(arduino, url_prefix="/flask_arduino")
+app.register_blueprint(Math, url_prefix="/math")
+app.register_blueprint(cpu, url_prefix="/CPU")
+app.register_blueprint(arduino, url_prefix="/arduino")
+app.register_blueprint(raspi, url_prefix="/raspberryPi")
 app.register_blueprint(game,url_prefix="/game")
 
 from apscheduler.schedulers.background import BackgroundScheduler
