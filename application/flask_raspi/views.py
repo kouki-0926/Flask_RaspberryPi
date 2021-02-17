@@ -13,7 +13,7 @@ def index_view():
 def Blink_view():
     try:
         Blink()
-        return render_template("led.html")
+        return render_template("Blink.html")
     except:
         flash("Error")
         return redirect(url_for("raspi.index_view"))
@@ -31,3 +31,5 @@ def led_view():
             return render_template("led.html", state="low")
         else:
             return redirect(url_for("raspi.led_view", state="high"))
+    else:
+        return redirect(url_for("raspi.led_view", state="high"))
