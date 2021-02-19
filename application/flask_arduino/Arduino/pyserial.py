@@ -15,9 +15,10 @@ def init():
     global ser
     if(ser == 0):
         try:
-            flash("pyserial is initializing")
             ser = serial.Serial("/dev/ttyACM0", 9600)
+            flash("pyserial is initializing")
         except:
+            ser = 0
             print("pyserial cannot be initialized")
 
 

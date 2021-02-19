@@ -14,7 +14,9 @@ def measure_temp_view():
     try:
         Data = pys.measure_temp()
         graph_type = request.args.get("graph_type")
-        if(graph_type != "temp" and graph_type != "humi"):
+        if(graph_type == "reset"):
+            return redirect(url_for("arduino.reset_graph_Data_view"))
+        elif(graph_type != "temp" and graph_type != "humi"):
             graph_type = "temp"
         return render_template("measure_temp.html", time=Data[0], temperature=Data[1][0], humidity=Data[1][1], graph_type=graph_type)
     except:
@@ -32,7 +34,7 @@ def graph_temp_view():
 def reset_graph_Data_view():
     pys.reset_graph_Data()
     flash("データは正常に初期化されました")
-    return redirect(url_for("arduino.measure_temp_view"))
+    return redirect(url_for("arduino.index_view"))
 
 
 @arduino.route("/blink")

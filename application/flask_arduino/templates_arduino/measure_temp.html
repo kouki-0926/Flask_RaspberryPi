@@ -11,33 +11,76 @@
 
 
 {% block BODY %}
-<h4>{{time}}</h4>
-<h4>temperature: {{temperature}}℃</h4>
-<h4>humidity: {{humidity}}%</h4>
+<style>
+  @media (min-width: 600px) {
+    #parent {
+      display: flex;
+    }
 
-<div class="form-check form-check-inline">
-  {% if graph_type=="temp" %}
-  <input class="form-check-input" type="radio" id="inlineRadio0" checked="checked">
-  {% else %}
-  <input class="form-check-input" type="radio" id="inlineRadio0">
-  {% endif %}
-  <label class="form-check-label" for="inlineRadio0">
-    <a href="{{url_for('arduino.measure_temp_view',graph_type='temp')}}" class="heading">temperature</a>
-  </label>
-</div>
+    #child1 {
+      flex-grow: 1;
+      position: relative;
+      background: orange;
+      height: 500px;
+    }
 
-<div class="form-check form-check-inline">
-  {% if graph_type=="humi" %}
-  <input class="form-check-input" type="radio" id="inlineRadio0" checked="checked">
-  {% else %}
-  <input class="form-check-input" type="radio" id="inlineRadio0">
-  {% endif %}
-  <label class="form-check-label" for="inlineRadio0">
-    <a href="{{url_for('arduino.measure_temp_view',graph_type='humi')}}" class="heading">humidity</a>
-  </label>
-</div>
+    #child1_1 {
+      background: bisque;
+      position: absolute;
+      top: 50%;
+      -webkit-transform: translateY(-50%);
+      transform: translateY(-50%);
+    }
 
-<div>
-  <img src="{{url_for('arduino.graph_temp_view',graph_type=graph_type)}}" alt="graph" class="graph">
+    #child2 {
+      flex-grow: 1;
+    }
+  }
+</style>
+
+<div id="parent">
+  <div id="child1">
+    <div class="child1_1">
+      <h4>{{time}}</h4>
+      <h4>temperature: {{temperature}}℃</h4>
+      <h4>humidity: {{humidity}}%</h4>
+
+      <div class="form-check form-check-inline">
+        {% if graph_type=="temp" %}
+        <input class="form-check-input" type="radio" id="inlineRadio0" checked="checked">
+        {% else %}
+        <input class="form-check-input" type="radio" id="inlineRadio0">
+        {% endif %}
+        <label class="form-check-label" for="inlineRadio0">
+          <a href="{{url_for('arduino.measure_temp_view',graph_type='temp')}}" class="heading">temperature</a>
+        </label>
+      </div>
+
+      <div class="form-check form-check-inline">
+        {% if graph_type=="humi" %}
+        <input class="form-check-input" type="radio" id="inlineRadio0" checked="checked">
+        {% else %}
+        <input class="form-check-input" type="radio" id="inlineRadio0">
+        {% endif %}
+        <label class="form-check-label" for="inlineRadio0">
+          <a href="{{url_for('arduino.measure_temp_view',graph_type='humi')}}" class="heading">humidity</a>
+        </label>
+      </div>
+
+      <div class="form-check form-check-inline">
+        {% if graph_type=="reset" %}
+        <input class="form-check-input" type="radio" id="inlineRadio0" checked="checked">
+        {% else %}
+        <input class="form-check-input" type="radio" id="inlineRadio0">
+        {% endif %}
+        <label class="form-check-label" for="inlineRadio0">
+          <a href="{{url_for('arduino.measure_temp_view',graph_type='reset')}}" class="heading">reset</a>
+        </label>
+      </div>
+    </div>
+  </div>
+  <div id="child2">
+    <img src="{{url_for('arduino.graph_temp_view',graph_type=graph_type)}}" alt="graph" class="graph">
+  </div>
 </div>
 {% endblock %}
