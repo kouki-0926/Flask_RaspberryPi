@@ -11,8 +11,9 @@
 
 
 {% block BODY %}
-<h3>{{time}}</h3>
-<h3>temperature: {{temperature}}℃　humidity: {{humidity}}%</h3>
+<h4>{{time}}</h4>
+<h4>temperature: {{temperature}}℃</h4>
+<h4>humidity: {{humidity}}%</h4>
 
 <div class="form-check form-check-inline">
   {% if graph_type=="temp" %}
@@ -36,5 +37,7 @@
   </label>
 </div>
 
-<img src="{{url_for('arduino.graph_temp_view',graph_type=graph_type)}}" alt="graph" class="graph">
+<div>
+  <img src="{{url_for('arduino.graph_temp_view',graph_type=graph_type)}}" alt="graph" class="graph">
+</div>
 {% endblock %}
