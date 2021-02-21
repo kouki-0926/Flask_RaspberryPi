@@ -37,13 +37,23 @@ def reset_graph_Data_view():
     return redirect(url_for("arduino.index_view"))
 
 
-@arduino.route("/blink")
-def blink_view():
-    pys.blink()
-    return render_template("blink.html")
-
-
-@arduino.route("/RGB")
-def RGB_view():
-    pys.RGB()
-    return redirect(url_for("arduino.index_view"))
+@arduino.route("/led", methods=["GET", "POST"])
+def led_view():
+    if(request.method == "GET"):
+        state = request.args.get("state")
+        if(state == "high"):
+            pys.High()
+            return render_template("led_arduino.html", state="high")
+        elif(state == "low"):
+            pys.Low()
+            return render_template("led_arduino.html", state="low")
+        elif(state == "blink"):
+            pys.blink()
+            return render_template("led_arduino.html", state="blink")
+        elif(state == "rgb"):
+            pys.RGB()
+            return render_template("led_arduino.html", state="rgb")
+        else:
+            return redirect(url_for("arduino.led_view", state="high"))
+    else:
+        return redirect(url_for("arduino.led_view", state="high"))

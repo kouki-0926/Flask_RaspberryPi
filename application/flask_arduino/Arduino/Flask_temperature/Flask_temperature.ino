@@ -33,6 +33,12 @@ void loop() {
         case 'b':
             blink(5);
             break;
+        case 'h':
+            rgb.on(1);
+            break;
+        case 'l':
+            rgb.off(1);
+            break;
     }
 }
 

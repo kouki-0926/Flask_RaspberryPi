@@ -15,7 +15,7 @@ def led_view():
         state = request.args.get("state")
         if(state == "high"):
             High()
-            return render_template("led_raspi.html", state="low")
+            return render_template("led_raspi.html", state="high")
         elif(state == "low"):
             LOW()
             return render_template("led_raspi.html", state="low")

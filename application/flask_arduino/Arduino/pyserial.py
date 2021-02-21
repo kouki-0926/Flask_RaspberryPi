@@ -105,3 +105,15 @@ def RGB():
         ser.write(b'r')
     except:
         init()
+
+def High():
+    try:
+        ser.write(b'h')
+    except:
+        init()
+
+def Low():
+    try:
+        ser.write(b'l')
+    except:
+        init()

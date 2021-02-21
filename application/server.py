@@ -25,8 +25,8 @@ from flask_arduino.Arduino.pyserial import measure_temp
 from flask_raspi.raspi.raspi import setup, destroy
 
 sched = BackgroundScheduler(standalone=True, coalesce=True)
-sched.add_job(update_CPU, 'interval', minutes=10)
-sched.add_job(measure_temp, 'interval', minutes=10)
+sched.add_job(update_CPU, 'interval', minutes=1)
+sched.add_job(measure_temp, 'interval', minutes=1)
 sched.start()
 
 if __name__ == "__main__":
