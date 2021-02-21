@@ -38,8 +38,7 @@
     {% if graph_type=="temp" %}
     <button class="btn btn-primary" onclick="location.href='/arduino/measure_temp?graph_type=temp'">temperature</button>
     {% else %}
-    <button class="btn btn-secondary"
-      onclick="location.href='/arduino/measure_temp?graph_type=temp'">temperature</button>
+    <button class="btn btn-secondary" onclick="location.href='/arduino/measure_temp?graph_type=temp'">temperature</button>
     {% endif %}
 
     {% if graph_type=="humi" %}
@@ -61,8 +60,7 @@
           </div>
           <div class="modal-body">
             <button class="btn btn-secondary" data-dismiss="modal">cansel</button>
-            <button class="btn btn-danger"
-              onclick="location.href='/arduino/measure_temp?graph_type=reset'">reset</button>
+            <button class="btn btn-danger" onclick="location.href='/arduino/measure_temp?graph_type=reset'">reset</button>
           </div>
         </div>
       </div>
