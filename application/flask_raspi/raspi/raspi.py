@@ -6,7 +6,7 @@ delaytime = 0.01
 
 
 def setup():
-    print("setup")
+    print("GPIO setup")
     GPIO.setmode(GPIO.BOARD)
     GPIO.setup(ledPin, GPIO.OUT)
     GPIO.output(ledPin, GPIO.LOW)
