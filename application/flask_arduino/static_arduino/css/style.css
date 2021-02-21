@@ -3,7 +3,8 @@
   text-align: center;
 }
 
-.heading:link, .heading:visited {
+.heading:link,
+.heading:visited {
   color: #000000;
   text-decoration: none;
 }
@@ -18,9 +19,9 @@
 }
 
 .graph {
-    width:75%;
-    max-width:100%;
-    height:auto;
+  width: 75%;
+  max-width: 100%;
+  height: auto;
 }
 
 /* footer */

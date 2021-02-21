@@ -1,7 +1,14 @@
 {% extends "layout_raspi.html" %}
 
 {% block SCRIPT %}
-
+{% if state=="blink" %}
+<script type="text/javascript">
+    function jumpPage() {
+        location.href = "{{url_for('raspi.led_view',state='blink')}}";
+    }
+    setTimeout("jumpPage()", 1000)
+</script>
+{% endif %}
 {% endblock %}
 
 
