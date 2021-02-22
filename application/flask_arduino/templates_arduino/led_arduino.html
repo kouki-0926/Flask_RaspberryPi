@@ -4,9 +4,16 @@
 {% if state=="blink" %}
 <script type="text/javascript">
     function jumpPage() {
-        location.href = "{{url_for('arduino.led_view',state='blink')}}";
+        location.href = "{{url_for('arduino.led_view',state=state)}}";
     }
     setTimeout("jumpPage()", 1000)
+</script>
+{% elif state=="rgb" %}
+<script type="text/javascript">
+    function jumpPage() {
+        location.href = "{{url_for('arduino.led_view',state=state)}}";
+    }
+    setTimeout("jumpPage()", 5000)
 </script>
 {% endif %}
 {% endblock %}
@@ -39,10 +46,5 @@
 {% else %}
 <button class="display-none btn btn-secondary" onclick="location.href='/arduino/led?state=low'">LOW</button>
 {% endif %}
-
-{% endblock %}
-
-
-{% block FOOTER %}
 
 {% endblock %}

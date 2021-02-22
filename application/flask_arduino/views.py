@@ -9,7 +9,7 @@ def index_view():
     return render_template("index_arduino.html")
 
 
-@arduino.route("/measure_temp", methods=["GET", "POST"])
+@arduino.route("/measure_temp")
 def measure_temp_view():
     try:
         Data = pys.measure_temp()
@@ -24,12 +24,6 @@ def measure_temp_view():
         return redirect(url_for("arduino.index_view"))
 
 
-@arduino.route("/graph_temp")
-def graph_temp_view():
-    graph_type = request.args.get("graph_type")
-    return pys.graph_temp(graph_type)
-
-
 @arduino.route("/measure_temp/reset")
 def reset_graph_Data_view():
     pys.reset_graph_Data()
@@ -37,23 +31,26 @@ def reset_graph_Data_view():
     return redirect(url_for("arduino.index_view"))
 
 
-@arduino.route("/led", methods=["GET", "POST"])
+@arduino.route("/graph_temp")
+def graph_temp_view():
+    graph_type = request.args.get("graph_type")
+    return pys.graph_temp(graph_type)
+
+
+@arduino.route("/led")
 def led_view():
-    if(request.method == "GET"):
-        state = request.args.get("state")
-        if(state == "high"):
-            pys.High()
-            return render_template("led_arduino.html", state="high")
-        elif(state == "low"):
-            pys.Low()
-            return render_template("led_arduino.html", state="low")
-        elif(state == "blink"):
-            pys.blink()
-            return render_template("led_arduino.html", state="blink")
-        elif(state == "rgb"):
-            pys.RGB()
-            return render_template("led_arduino.html", state="rgb")
-        else:
-            return redirect(url_for("arduino.led_view", state="high"))
+    state = request.args.get("state")
+    if(state == "high"):
+        pys.High()
+        return render_template("led_arduino.html", state="high")
+    elif(state == "low"):
+        pys.Low()
+        return render_template("led_arduino.html", state="low")
+    elif(state == "blink"):
+        pys.blink()
+        return render_template("led_arduino.html", state="blink")
+    elif(state == "rgb"):
+        pys.RGB()
+        return render_template("led_arduino.html", state="rgb")
     else:
         return redirect(url_for("arduino.led_view", state="high"))

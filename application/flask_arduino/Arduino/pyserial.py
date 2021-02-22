@@ -106,11 +106,13 @@ def RGB():
     except:
         init()
 
+
 def High():
     try:
         ser.write(b'h')
     except:
         init()
+
 
 def Low():
     try:
