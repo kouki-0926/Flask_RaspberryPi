@@ -7,11 +7,59 @@
   }
   setTimeout("jumpPage()", 5000)
 </script>
+<style>
+  .blog-body {
+    padding: 1.25em;
+  }
+
+  * {
+    font-family: "Mplus 1p";
+  }
+
+  .heading:link,
+  .heading:visited {
+    color: #000000;
+    text-decoration: none;
+  }
+
+  .heading:hover {
+    color: #555555;
+    text-decoration: none;
+  }
+
+  .center {
+    text-align: center;
+  }
+
+  /* footer */
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  .footer {
+    margin-top: auto;
+    background-color: darkgray;
+    padding: 15px 0;
+  }
+
+  .footer_ul {
+    column-count: 6;
+  }
+
+  @media only screen and (max-device-width: 480px) {
+    .footer_ul {
+      column-count: 2;
+    }
+  }
+</style>
 {% endblock %}
 
 {% block body %}
 <div class="center">
-  <h5>I'm sorry. The specified URL does not exist. Moves to the <a href="{{url_for('main.index_view')}}">Top Page</a>after 5 seconds.</h5>
-  <img src="https://http.cat/404.jpg" alt="404" style="width:50%;max-width:100%;height:auto;">
+  <h5>I'm sorry. The specified URL does not exist. Moves to the <a href="{{url_for('main.index_view')}}">Top
+      Page</a>after 5 seconds.</h5>
+  <img src="https://http.cat/404.jpg" alt="404" style="width:50%;max-width:50%;height:auto;">
 </div>
 {% endblock %}
