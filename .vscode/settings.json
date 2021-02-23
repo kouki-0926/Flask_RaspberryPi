@@ -4,6 +4,7 @@
   // raspberry pi
   "window.zoomLevel": 1.0,
   "editor.fontSize": 16,
+  "python.pythonPath": "/bin/python",
   // windows10
   //  "window.zoomLevel": 1.0,
   //  "editor.fontSize": 15,

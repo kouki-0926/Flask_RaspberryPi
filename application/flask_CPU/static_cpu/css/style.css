@@ -3,7 +3,8 @@
   text-align: center;
 }
 
-.heading:link, .heading:visited {
+.heading:link,
+.heading:visited {
   color: #000000;
   text-decoration: none;
 }
@@ -11,11 +12,6 @@
 .heading:hover {
   color: #555555;
   text-decoration: none;
-}
-
-.graph {
-  width: 100%;
-  height: auto;
 }
 
 .left {
@@ -47,7 +43,6 @@
   width: 50%;
 }
 
-
 /* footer */
 .wrapper {
   display: flex;
@@ -77,10 +72,31 @@
   .footer_ul {
     column-count: 2;
   }
-  .footer_ul_ip, .footer_ul_weather {
+  .footer_ul_ip,
+  .footer_ul_weather {
     column-count: 1;
   }
-  .split, .split2 {
-    width: 100%;
+}
+
+/* 2分割 */
+@media (min-width: 600px) {
+  #parent {
+    display: flex;
   }
+
+  #child1 {
+    flex-grow: 1;
+    padding-top: 8%;
+    padding-left: 8%;
+  }
+
+  #child2 {
+    flex-grow: 1;
+  }
+}
+
+.graph {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
 }
