@@ -29,7 +29,7 @@ h_now_set = np.array([j])
 
 # ====2.機械学習の実行=============================
 # 三層ニューラルネットワークを定義
-clf = MLPClassifier(hidden_layer_sizes=(200,), random_state=None)
+clf = MLPClassifier(hidden_layer_sizes=(400, 100, 200), random_state=None)
 
 # ランダムな入力でオンライン学習を1回行う。
 # 初回の学習では、あり得るターゲット(0, 1, 2)を分類器に知らせる必要がある
@@ -83,3 +83,8 @@ def janken_ml(h_choice):
     clf.partial_fit(ch_prev_set, h_now_set)
 
     return Anser
+
+
+def janken_ml_reset():
+    global result
+    result=[0, 0, 0]

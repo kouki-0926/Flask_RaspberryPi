@@ -18,14 +18,22 @@ def janken_view():
     else:
         return redirect(url_for("game.janken_view", n='1'))
 
-@game.route("/janken_ml")
+
+@game.route("/janken/ml")
 def janken_ml_view():
     n = request.args.get("n")
     if(n == '1' or n == '2' or n == '3'):
         Anser = janken_ml.janken_ml(int(n))
         return render_template("janken_ml.html", n=n, Anser=Anser)
+    elif(n == "init"):
+        janken_ml.janken_ml_reset()
+        return render_template("janken_ml.html")
+    elif(n == "reset"):
+        janken_ml.janken_ml_reset()
+        flash("正常に勝敗結果が初期化されました")
+        return render_template("janken_ml.html")
     else:
-        return redirect(url_for("game.janken_ml_view", n='1'))
+        return redirect(url_for("game.janken_ml_view", n="init"))
 
 
 @game.route("/box")
