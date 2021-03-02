@@ -13,18 +13,14 @@ def janken(n):
         te = ["グー", "チョキ", "パー"]
         nc = int(uniform(0, 100)) % 3+1
 
-        Anser = ["君は["+str(te[n-1])+"]か。"]
+        Anser = ["あなた:"+te[n-1]+", NPU:"+te[nc-1]]
 
         if (nc == n):
-            Anser.append("俺も["+te[nc - 1]+"]だ。あいこだな。")
             result[2] += 1
         elif ((nc - n == -2) or (nc - n == 1)):
-            Anser.append("俺は["+te[nc - 1]+"]だ。君の勝ちだな。")
             result[0] += 1
         else:
-            Anser.append("俺は["+te[nc - 1]+"]だ。俺の勝ちだな。")
             result[1] += 1
-
         total += 1
         for i in range(3):
             result_2[i] = round(result[i]/total*100, 1)

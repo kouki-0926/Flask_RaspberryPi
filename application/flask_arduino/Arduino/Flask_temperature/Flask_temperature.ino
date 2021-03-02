@@ -28,15 +28,19 @@ void loop() {
             measure_tempereture();
             break;
         case 'r':
+            Serial.println("ok");
             RGB();
             break;
         case 'b':
+            Serial.println("ok");
             blink(5);
             break;
         case 'h':
+            Serial.println("ok");
             rgb.on(1);
             break;
         case 'l':
+            Serial.println("ok");
             rgb.off(1);
             break;
     }
@@ -53,13 +57,13 @@ void measure_tempereture() {
 void RGB() {
     int max = 255;
     for (int i = 0; i < max; i++) {
-        rgb.RGB_LED(i, max - i, 0, 5);
+        rgb.RGB_LED(i, max - i, 0, 3);
     }
     for (int i = 0; i < max; i++) {
-        rgb.RGB_LED(max - i, 0, i, 5);
+        rgb.RGB_LED(max - i, 0, i, 3);
     }
     for (int i = 0; i < max; i++) {
-        rgb.RGB_LED(0, i, max - i, 5);
+        rgb.RGB_LED(0, i, max - i, 3);
     }
 }
 

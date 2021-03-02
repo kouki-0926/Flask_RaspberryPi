@@ -51,6 +51,7 @@ def measure_temp():
         graph_Data[1].append(tmp_Data[0])
         graph_Data[2].append(tmp_Data[1])
 
+        print("measure_temp was successful")
         return Data
     except:
         init()
@@ -93,29 +94,11 @@ def graph_temp(graph_type):
         flash("graph error")
 
 
-def blink():
+def LED(state):
     try:
-        ser.write(b'b')
-    except:
-        init()
-
-
-def RGB():
-    try:
-        ser.write(b'r')
-    except:
-        init()
-
-
-def High():
-    try:
-        ser.write(b'h')
-    except:
-        init()
-
-
-def Low():
-    try:
-        ser.write(b'l')
+        ser.write(state.encode("utf-8"))
+        s = ser.readline()
+        s = s.strip()
+        return s.decode("utf-8")
     except:
         init()
