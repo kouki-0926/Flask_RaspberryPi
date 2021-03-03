@@ -1,7 +1,8 @@
 from flask import redirect, url_for, render_template, flash, Blueprint, request
 from flask_arduino.Arduino import pyserial as pys
 
-arduino = Blueprint("arduino", __name__, template_folder='templates_arduino', static_folder="static_arduino")
+arduino = Blueprint("arduino", __name__,
+                    template_folder='templates_arduino', static_folder="static_arduino")
 
 
 @arduino.route("/")
@@ -40,9 +41,5 @@ def graph_temp_view():
 @arduino.route("/led")
 def led_view():
     state = request.args.get("state")
-    s = pys.LED(state[0])
-    if(s == "ok"):
-        return render_template("led_arduino.html", state=state)
-    else:
-        flash("Error:Arduinoとの接続が確認できませんでした")
-        return redirect(url_for("arduino.index_view"))
+    pys.LED(state[0])
+    return render_template("led_arduino.html", state=state)

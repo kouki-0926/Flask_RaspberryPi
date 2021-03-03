@@ -25,22 +25,19 @@ void loop() {
 
     switch (var) {
         case 'm':
+            Serial.println("OK");
             measure_tempereture();
             break;
         case 'r':
-            Serial.println("ok");
             RGB();
             break;
         case 'b':
-            Serial.println("ok");
             blink(5);
             break;
         case 'h':
-            Serial.println("ok");
             rgb.on(1);
             break;
         case 'l':
-            Serial.println("ok");
             rgb.off(1);
             break;
     }
