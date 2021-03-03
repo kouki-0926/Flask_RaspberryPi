@@ -17,23 +17,23 @@ app.register_blueprint(Math, url_prefix="/math")
 app.register_blueprint(cpu, url_prefix="/CPU")
 app.register_blueprint(arduino, url_prefix="/arduino")
 app.register_blueprint(raspi, url_prefix="/raspi")
-app.register_blueprint(game,url_prefix="/game")
+app.register_blueprint(game, url_prefix="/game")
 
 from apscheduler.schedulers.background import BackgroundScheduler
 from flask_CPU.CPU.CPU import update_CPU
-from flask_arduino.Arduino.pyserial import measure_temp
+from flask_arduino.Arduino.pyserial import measure_temp, arduino_check, arduino_destroy
 from flask_raspi.raspi.raspi import gpio_setup, gpio_destroy
 
 sched = BackgroundScheduler(standalone=True, coalesce=True)
 sched.add_job(update_CPU, 'interval', minutes=1)
 sched.add_job(measure_temp, 'interval', minutes=1)
+sched.add_job(arduino_check, 'interval', minutes=1)
 sched.start()
 
 if __name__ == "__main__":
-    try:
-        update_CPU()
-        measure_temp()
-        gpio_setup()
-        app.run("0.0.0.0", port=5000)
-    except KeyboardInterrupt:
-        gpio_destroy()
+    update_CPU()
+    measure_temp()
+    gpio_setup()
+    app.run("0.0.0.0", port=5000)
+    gpio_destroy()
+    arduino_destroy()

@@ -7,32 +7,47 @@ import datetime
 import serial
 import os
 
-ser = 0
+try:
+    ser = serial.Serial("/dev/ttyACM0", 9600)
+    connected = True
+except:
+    connected = False
+    print("pyserial cannot be initialized")
+
+
 graph_Data = [[], [], []]
 
 
-def init():
-    global ser
-    if(ser == 0):
-        try:
-            ser = serial.Serial("/dev/ttyACM0", 9600)
-            flash("pyserial is initializing")
-        except:
-            ser = 0
-            print("pyserial cannot be initialized")
+def arduino_check():
+    try:
+        ser.write(b'c')
+        connected = True
+        print("Arduino is connected")
+    except:
+        connected = False
+        print("Arduino is not connected")
+
+
+
+def arduino_destroy():
+    if(connected):
+        ser.close()
+        print("pyserial destroy")
+    else:
+        print("pyserial cannot close")
 
 
 def reset_graph_Data():
-    global graph_Data, ser
-    ser = 0
-    graph_Data = [[], [], []]
-    print("graph_Data was initialized")
+    if(connected):
+        global graph_Data
+        graph_Data = [[], [], []]
+        print("graph_Data was initialized")
 
 
 def measure_temp():
-    global graph_Data
-    Data = []
-    try:
+    if(connected):
+        global graph_Data
+        Data = []
         ser.write(b'm')
 
         date = datetime.datetime.now()
@@ -53,8 +68,6 @@ def measure_temp():
 
         print("measure_temp was successful")
         return Data
-    except:
-        init()
 
 
 def graph_temp(graph_type):
@@ -95,10 +108,7 @@ def graph_temp(graph_type):
 
 
 def LED(state):
-    try:
-        ser.write(state.encode("utf-8"))
-        s = ser.readline()
-        s = s.strip()
-        return s.decode("utf-8")
-    except:
-        init()
+    ser.write(state.encode("utf-8"))
+    s = ser.readline()
+    s = s.strip()
+    return s.decode("utf-8")
