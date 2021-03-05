@@ -10,6 +10,15 @@ def index_view():
     return render_template("index_arduino.html")
 
 
+@arduino.route("/init")
+def init_view():
+    try:
+        pys.init()
+    except:
+        flash("Error:Arduinoとの接続が確認できませんでした")
+    return redirect(url_for("arduino.index_view"))
+
+
 @arduino.route("/measure_temp")
 def measure_temp_view():
     try:

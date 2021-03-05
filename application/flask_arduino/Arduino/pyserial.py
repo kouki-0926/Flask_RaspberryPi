@@ -10,20 +10,21 @@ import os
 
 graph_Data = [[], [], []]
 connected = False
-try:
-    ser = serial.Serial("/dev/ttyACM0", 9600)
-    connected = True
-    print("pyserial was initialized")
-except:
-    connected = False
-    print("pyserial was not initialized")
+ser = 0
 
 
-def decode():
-    a = ser.readline()
-    a = a.strip()
-    a = a.decode("utf-8")
-    return a
+def init():
+    global ser
+    if(ser == 0):
+        try:
+            ser = serial.Serial("/dev/ttyACM0", 9600)
+            connected = True
+            print("pyserial is initialized")
+        except:
+            connected = False
+            print("pyserial is not initialized")
+    else:
+        print("pyserial was initialized")
 
 
 def check_connect(func):
@@ -54,40 +55,30 @@ def reset_graph_Data():
 
 
 def measure_temp():
-    global graph_Data, ser
+    global graph_Data
     Data = []
+    try:
+        ser.write(b'm')
 
-    ser.write(b'm')
-    if(decode() == "OK"):
-        connected = True
-        print("Arduino is connected")
-    else:
-        try:
-            ser = serial.Serial("/dev/ttyACM0", 9600)
-            connected = True
-            print("pyserial was initialized")
-            return redirect(url_for("arduino.measure_temp_view"))
-        except:
-            connected = False
-            print("Arduino is not connected")
-            return ["Error"]
+        date = datetime.datetime.now()
+        display_date = str(date).split(".")
+        Data.append(display_date[0])
+        graph_date = date.strftime("%H:%M:%S")
+        graph_Data[0].append(graph_date)
 
-    date = datetime.datetime.now()
-    display_date = str(date).split(".")
-    Data.append(display_date[0])
-    graph_date = date.strftime("%H:%M:%S")
-    graph_Data[0].append(graph_date)
+        tmp_Data = []
+        for count in range(2):
+            data = ser.readline()
+            data = data.strip()
+            data = data.decode("utf-8")
+            tmp_Data.append(float(data))
+        Data.append(tmp_Data)
+        graph_Data[1].append(tmp_Data[0])
+        graph_Data[2].append(tmp_Data[1])
 
-    tmp_Data = []
-    for count in range(2):
-        data = decode()
-        tmp_Data.append(float(data))
-    Data.append(tmp_Data)
-    graph_Data[1].append(tmp_Data[0])
-    graph_Data[2].append(tmp_Data[1])
-
-    print("measure_temp was successful")
-    return Data
+        return Data
+    except:
+        init()
 
 
 def graph_temp(graph_type):
