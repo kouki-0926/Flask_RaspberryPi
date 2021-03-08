@@ -102,8 +102,6 @@ function changeregion() {
       { cd: "260010", label: "京都" },
       { cd: "260020", label: "舞鶴" },
       { cd: "270000", label: "大阪" },
-      { cd: "270000", label: "大阪" },
-      { cd: "270000", label: "大阪" },
       { cd: "280010", label: "神戸" },
       { cd: "280020", label: "豊岡" },
       { cd: "290010", label: "奈良" },
@@ -131,8 +129,6 @@ function changeregion() {
     pref_list = [
       { cd: "360010", label: "徳島" },
       { cd: "360020", label: "日和佐" },
-      { cd: "370000", label: "高松" },
-      { cd: "370000", label: "高松" },
       { cd: "370000", label: "高松" },
       { cd: "380010", label: "松山" },
       { cd: "380020", label: "新居浜" },
@@ -181,7 +177,9 @@ function changeregion() {
       { cd: "474020", label: "与那国島" },
     ];
   }
-  region_list_2 = [{ cd: "", label: "地点を選択して下さい" }];
+  region_list_2 = [
+    { cd: "", label: "地点を選択して下さい" }
+  ];
   region_list_2.forEach(function (value) {
     var op_2 = document.createElement("option");
     op_2.value = value.cd;
@@ -189,7 +187,9 @@ function changeregion() {
     pref.appendChild(op_2);
   });
 
-  region_list = [{ label: changedRegion }];
+  region_list = [
+    { label: changedRegion }
+  ];
   region_list.forEach(function (value) {
     var opt = document.createElement("optgroup");
     opt.label = value.label;
