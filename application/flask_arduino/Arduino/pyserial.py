@@ -14,38 +14,41 @@ ser = 0
 
 
 def init():
-    global ser
+    global ser, connected
     if(ser == 0):
         try:
             ser = serial.Serial("/dev/ttyACM0", 9600)
             connected = True
             print("pyserial is initialized")
         except:
+            ser = 0
             connected = False
-            print("pyserial is not initialized")
+            print("pyserial cannot be initialized")
     else:
+        connected = True
         print("pyserial was initialized")
+    return connected
 
 
-def check_connect(func):
-    @wraps(func)
-    def inner(*args, **kwargs):
+def arduino_destroy():
+    if(connected):
+        ser.close()
+        print("arduino_destroy")
+    else:
+        print("Arduino is not connected")
+
+
+def LED(state):
+    try:
         if(connected):
-            return func(*args, **kwargs)
+            ser.write(state.encode("utf-8"))
+            return True
         else:
             print("Arduino is not connected")
-    return inner
-
-
-@check_connect
-def arduino_destroy():
-    ser.close()
-    print("arduino_destroy")
-
-
-@check_connect
-def LED(state):
-    ser.write(state.encode("utf-8"))
+            return False
+    except:
+        print("Arduino is not connected(except)")
+        return False
 
 
 def reset_graph_Data():
@@ -76,6 +79,7 @@ def measure_temp():
         graph_Data[1].append(tmp_Data[0])
         graph_Data[2].append(tmp_Data[1])
 
+        print("measure_temp was successful")
         return Data
     except:
         init()
