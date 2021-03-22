@@ -1,36 +1,68 @@
+from functools import wraps
 from matplotlib.backends.backend_agg import FigureCanvasAgg
 import matplotlib.pyplot as plt
-from flask import make_response, flash
+from flask import make_response, flash, redirect, url_for
 from subprocess import getoutput
 from io import BytesIO
 import datetime
 import serial
 import os
 
-ser = 0
 graph_Data = [[], [], []]
+connected = False
+ser = 0
 
 
-def init():
-    global ser
+def arduino_init():
+    global ser, connected
     if(ser == 0):
         try:
             ser = serial.Serial("/dev/ttyACM0", 9600)
-            flash("pyserial is initializing")
+            connected = True
+            print("pyserial is initialized")
         except:
             ser = 0
+            connected = False
             print("pyserial cannot be initialized")
+    else:
+        connected = True
+        print("pyserial was initialized")
+    return connected
+
+
+def arduino_destroy():
+    if(connected):
+        ser.close()
+        print("arduino_destroy")
+    else:
+        print("Arduino is not connected")
+
+
+def LED(state):
+    try:
+        if(connected):
+            ser.write(state.encode("utf-8"))
+            return True
+        else:
+            print("Arduino is not connected")
+            return False
+    except:
+        print("Arduino is not connected(except)")
+        return False
 
 
 def reset_graph_Data():
-    global graph_Data, ser
-    ser = 0
+    global graph_Data
     graph_Data = [[], [], []]
     print("graph_Data was initialized")
 
 
 def measure_temp():
     global graph_Data
+    if(len(graph_Data[0]) >= 20):
+        for i in range(3):
+            graph_Data[i] = graph_Data[i][1:21]
+
     Data = []
     try:
         ser.write(b'm')
@@ -42,7 +74,7 @@ def measure_temp():
         graph_Data[0].append(graph_date)
 
         tmp_Data = []
-        for count in range(2):
+        for i in range(2):
             data = ser.readline()
             data = data.strip()
             data = data.decode("utf-8")
@@ -51,9 +83,10 @@ def measure_temp():
         graph_Data[1].append(tmp_Data[0])
         graph_Data[2].append(tmp_Data[1])
 
+        print("measure_temp was successful, dataSize="+str(len(graph_Data[1])))
         return Data
     except:
-        init()
+        arduino_init()
 
 
 def graph_temp(graph_type):
@@ -61,10 +94,6 @@ def graph_temp(graph_type):
     try:
         if(len(graph_Data[0]) != len(graph_Data[1])):
             graph_Data = [[], [], []]
-        if(len(graph_Data[0]) >= 20):
-            graph_Data[0] = graph_Data[0][1:]
-            graph_Data[1] = graph_Data[1][1:]
-            graph_Data[2] = graph_Data[2][1:]
 
         fig = plt.figure(figsize=(7, 8))
         plt.xlabel("time")
@@ -91,31 +120,3 @@ def graph_temp(graph_type):
         return response
     except:
         flash("graph error")
-
-
-def blink():
-    try:
-        ser.write(b'b')
-    except:
-        init()
-
-
-def RGB():
-    try:
-        ser.write(b'r')
-    except:
-        init()
-
-
-def High():
-    try:
-        ser.write(b'h')
-    except:
-        init()
-
-
-def Low():
-    try:
-        ser.write(b'l')
-    except:
-        init()

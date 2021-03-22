@@ -9,6 +9,16 @@ def index_view():
     return render_template("index_arduino.html")
 
 
+@arduino.route("/init")
+def init_view():
+    connected = pys.arduino_init()
+    if(connected):
+        flash("Arduinoとの接続が確認できました")
+    else:
+        flash("Error:Arduinoとの接続が確認できませんでした")
+    return redirect(url_for("arduino.index_view"))
+
+
 @arduino.route("/measure_temp")
 def measure_temp_view():
     try:
@@ -40,17 +50,9 @@ def graph_temp_view():
 @arduino.route("/led")
 def led_view():
     state = request.args.get("state")
-    if(state == "high"):
-        pys.High()
-        return render_template("led_arduino.html", state="high")
-    elif(state == "low"):
-        pys.Low()
-        return render_template("led_arduino.html", state="low")
-    elif(state == "blink"):
-        pys.blink()
-        return render_template("led_arduino.html", state="blink")
-    elif(state == "rgb"):
-        pys.RGB()
-        return render_template("led_arduino.html", state="rgb")
+    if(pys.LED(state[0])):
+        print("state: "+state)
+        return render_template("led_arduino.html", state=state)
     else:
-        return redirect(url_for("arduino.led_view", state="high"))
+        flash("Error:Arduinoとの接続が確認できませんでした")
+        return redirect(url_for("arduino.index_view"))
