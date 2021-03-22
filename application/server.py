@@ -21,7 +21,7 @@ app.register_blueprint(game, url_prefix="/game")
 
 from apscheduler.schedulers.background import BackgroundScheduler
 from flask_CPU.CPU.CPU import update_CPU
-from flask_arduino.Arduino.pyserial import measure_temp, arduino_destroy
+from flask_arduino.Arduino.pyserial import measure_temp, arduino_init, arduino_destroy
 from flask_raspi.raspi.raspi import gpio_setup, gpio_destroy
 
 sched = BackgroundScheduler(standalone=True, coalesce=True)
@@ -32,7 +32,7 @@ sched.start()
 if __name__ == "__main__":
     update_CPU()
     gpio_setup()
-    measure_temp()
+    arduino_init()
     app.run("0.0.0.0", port=5000)
     gpio_destroy()
     arduino_destroy()

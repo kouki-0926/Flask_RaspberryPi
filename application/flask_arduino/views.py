@@ -11,7 +11,7 @@ def index_view():
 
 @arduino.route("/init")
 def init_view():
-    connected = pys.init()
+    connected = pys.arduino_init()
     if(connected):
         flash("Arduinoとの接続が確認できました")
     else:

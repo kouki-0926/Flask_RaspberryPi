@@ -13,7 +13,7 @@ connected = False
 ser = 0
 
 
-def init():
+def arduino_init():
     global ser, connected
     if(ser == 0):
         try:
@@ -59,6 +59,10 @@ def reset_graph_Data():
 
 def measure_temp():
     global graph_Data
+    if(len(graph_Data[0]) >= 20):
+        for i in range(3):
+            graph_Data[i] = graph_Data[i][1:21]
+
     Data = []
     try:
         ser.write(b'm')
@@ -70,7 +74,7 @@ def measure_temp():
         graph_Data[0].append(graph_date)
 
         tmp_Data = []
-        for count in range(2):
+        for i in range(2):
             data = ser.readline()
             data = data.strip()
             data = data.decode("utf-8")
@@ -79,10 +83,10 @@ def measure_temp():
         graph_Data[1].append(tmp_Data[0])
         graph_Data[2].append(tmp_Data[1])
 
-        print("measure_temp was successful")
+        print("measure_temp was successful, dataSize="+str(len(graph_Data[1])))
         return Data
     except:
-        init()
+        arduino_init()
 
 
 def graph_temp(graph_type):
@@ -90,10 +94,6 @@ def graph_temp(graph_type):
     try:
         if(len(graph_Data[0]) != len(graph_Data[1])):
             graph_Data = [[], [], []]
-        if(len(graph_Data[0]) >= 20):
-            graph_Data[0] = graph_Data[0][1:]
-            graph_Data[1] = graph_Data[1][1:]
-            graph_Data[2] = graph_Data[2][1:]
 
         fig = plt.figure(figsize=(7, 8))
         plt.xlabel("time")
