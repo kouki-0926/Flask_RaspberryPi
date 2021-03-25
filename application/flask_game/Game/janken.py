@@ -7,7 +7,6 @@ def janken(n, result):
         nc = int(uniform(0, 100)) % 3+1
 
         Anser = [[n, nc], [], result]
-
         if (nc == n):
             Anser[2][2] += 1
             Anser[1].append("あいこ")
