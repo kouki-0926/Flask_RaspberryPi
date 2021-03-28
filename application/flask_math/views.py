@@ -1,7 +1,7 @@
 from flask import request, redirect, url_for, render_template, flash, Blueprint, make_response
 from flask_math.calculation import *
 
-Math = Blueprint("Math", __name__, template_folder="templates", static_folder="static")
+Math = Blueprint("Math", __name__, template_folder="templates_math", static_folder="static_math")
 
 
 @Math.route("/index")
