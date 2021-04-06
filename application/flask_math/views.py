@@ -230,7 +230,7 @@ def graph_view():
             upper_end_x = 10
         return render_template("graph.html", formula_1=formula_1, lower_end_x=lower_end_x, upper_end_x=upper_end_x, init_flag=0)
     else:
-        return render_template("graph.html", lower_end=-10, upper_end=10, init_flag=1)
+        return render_template("graph.html", lower_end_x=-10, upper_end_x=10, init_flag=1)
 
 
 @Math.route('/graph.png')
