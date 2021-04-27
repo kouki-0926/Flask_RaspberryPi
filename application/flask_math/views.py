@@ -1,12 +1,65 @@
 from flask import request, redirect, url_for, render_template, flash, Blueprint, make_response
 from flask_math.calculation import *
 
-Math = Blueprint("Math", __name__, template_folder="templates_math", static_folder="static_math")
+Math = Blueprint("Math", __name__,
+                 template_folder="templates_math", static_folder="static_math")
+
+
+@Math.route("/laplace", methods=["GET", "POST"])
+def laplace_view():
+    if request.method == "POST":
+        formula = request.form.get("formula")
+        type = request.args.get("type")
+        anser = laplace.laplace(formula, type=type)
+        return render_template("laplace.html", formula=formula, type=type, anser=anser, init_flag=0)
+    else:
+        type = request.args.get("type")
+        if(type == "lap" or type == "inv"):
+            return render_template("laplace.html", type=type, init_flag=1)
+        else:
+            return redirect(url_for('Math.laplace_view', type='lap'))
+
+
+@Math.route("/sysio", methods=["GET", "POST"])
+def sysio_view():
+    if request.method == "POST":
+        formula = request.form.get("formula")
+        formula_2 = request.form.get("formula_2")
+        lower_end = request.form.get("lower_end")
+        upper_end = request.form.get("upper_end")
+        type = request.args.get("type")
+        return render_template("sysio.html", formula=formula, formula_2=formula_2, lower_end=lower_end, upper_end=upper_end, type=type, init_flag=0)
+    else:
+        type = request.args.get("type")
+        if(type == "s" or type == "t"):
+            return render_template("sysio.html", lower_end=-2, upper_end=5, type=type, init_flag=1)
+        else:
+            return redirect(url_for('Math.sysio_view', type='s'))
+
+
+@Math.route("/sysio_graph", methods=["GET", "POST"])
+def sysio_graph_png():
+    formula = request.args.get("formula")
+    formula_2 = request.args.get("formula_2")
+    lower_end = request.args.get("lower_end")
+    upper_end = request.args.get("upper_end")
+    type = request.args.get("type")
+    try:
+        response = sysio.sysio(formula, formula_2, lower_end, upper_end, type=type)
+        return response
+    except:
+        flash("Error")
+        return "Error"
 
 
 @Math.route("/index")
 def index_view():
     return render_template("index.html")
+
+
+@Math.route("/test")
+def test_view():
+    return render_template("test.html")
 
 
 @Math.route("/index_2")
@@ -230,7 +283,7 @@ def graph_view():
             upper_end_x = 10
         return render_template("graph.html", formula_1=formula_1, lower_end_x=lower_end_x, upper_end_x=upper_end_x, init_flag=0)
     else:
-        return render_template("graph.html", lower_end=-10, upper_end=10, init_flag=1)
+        return render_template("graph.html", lower_end_x=-10, upper_end_x=10, init_flag=1)
 
 
 @Math.route('/graph.png')

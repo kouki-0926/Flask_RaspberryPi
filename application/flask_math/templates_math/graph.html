@@ -6,10 +6,10 @@
 
 <form action="{{url_for('Math.graph_view')}}" method="post" enctype="multipart/form-data">
   <div class="form-group">
-    <label for="InputFormula">関数\(f(x)\)を入力してください</label>
+    <label for="InputFormula">関数\(f(x,y)\)を入力してください</label>
     <div class="input-group">
       <div class="input-group-prepend">
-        <span class="input-group-text"><small>\(f(x)\)</small></span>
+        <span class="input-group-text"><small>\(f(x,y)\)</small></span>
       </div>
       <input type="text" name="formula_1" class="form-control" value="{{formula_1}}" placeholder="function">
     </div>
