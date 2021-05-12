@@ -5,6 +5,10 @@ Math = Blueprint("Math", __name__,
                  template_folder="templates_math", static_folder="static_math")
 
 
+@Math.route("/test")
+def test_view():
+    return render_template("test.html")
+
 @Math.route("/index")
 def index_view():
     return render_template("index.html")
@@ -409,7 +413,7 @@ def sysio_view():
         return render_template("sysio.html", formula=formula, formula_2=formula_2, lower_end=lower_end, upper_end=upper_end, type=type, init_flag=0)
     else:
         type = request.args.get("type")
-        if(type == "s" or type == "t"):
+        if(type == "s" or type == "t" or type == "m"):
             return render_template("sysio.html", lower_end=-2, upper_end=5, type=type, init_flag=1)
         else:
             return redirect(url_for('Math.sysio_view', type='s'))
