@@ -9,6 +9,7 @@ Math = Blueprint("Math", __name__,
 def test_view():
     return render_template("test.html")
 
+
 @Math.route("/index")
 def index_view():
     return render_template("index.html")
@@ -405,12 +406,19 @@ def Sieve_of_Eratosthenes_view():
 @Math.route("/sysio", methods=["GET", "POST"])
 def sysio_view():
     if request.method == "POST":
+        type = request.args.get("type")
         formula = request.form.get("formula")
-        formula_2 = request.form.get("formula_2")
         lower_end = request.form.get("lower_end")
         upper_end = request.form.get("upper_end")
-        type = request.args.get("type")
-        return render_template("sysio.html", formula=formula, formula_2=formula_2, lower_end=lower_end, upper_end=upper_end, type=type, init_flag=0)
+        if(type == "m"):
+            matrix_A = request.form.get("matrix_A")
+            matrix_B = request.form.get("matrix_B")
+            matrix_C = request.form.get("matrix_C")
+            matrix_D = request.form.get("matrix_D")
+            return render_template("sysio.html", matrix_A=matrix_A, matrix_B=matrix_B, matrix_C=matrix_C, matrix_D=matrix_D, formula=formula, lower_end=lower_end, upper_end=upper_end, type=type, init_flag=0)
+        else:
+            formula_2 = request.form.get("formula_2")
+            return render_template("sysio.html", formula=formula, formula_2=formula_2, lower_end=lower_end, upper_end=upper_end, type=type, init_flag=0)
     else:
         type = request.args.get("type")
         if(type == "s" or type == "t" or type == "m"):
@@ -421,14 +429,21 @@ def sysio_view():
 
 @Math.route("/sysio_graph", methods=["GET", "POST"])
 def sysio_graph_png():
-    formula = request.args.get("formula")
-    formula_2 = request.args.get("formula_2")
-    lower_end = request.args.get("lower_end")
-    upper_end = request.args.get("upper_end")
-    type = request.args.get("type")
     try:
-        response = sysio.sysio(
-            formula, formula_2, lower_end, upper_end, type=type)
+        type = request.args.get("type")
+        formula = request.args.get("formula")
+        lower_end = request.args.get("lower_end")
+        upper_end = request.args.get("upper_end")
+        if(type == "m"):
+            matrix_A = request.args.get("matrix_A")
+            matrix_B = request.args.get("matrix_B")
+            matrix_C = request.args.get("matrix_C")
+            matrix_D = request.args.get("matrix_D")
+            matrix_X = request.args.get("matrix_X")
+            response = sysio_matrix.sysio_matrix(matrix_A, matrix_B, matrix_C, matrix_D, matrix_X, formula, lower_end, upper_end, type)
+        else:
+            formula_2 = request.args.get("formula_2")
+            response = sysio.sysio(formula, formula_2, lower_end, upper_end, type)
         return response
     except:
         flash("Error")

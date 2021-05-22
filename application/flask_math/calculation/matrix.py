@@ -3,11 +3,12 @@ from flask import flash
 from flask_math.calculation.common.MATRIX import MATRIX
 from flask_math.calculation.common.STR import LATEX
 
+s = Symbol("s")
+
 
 def calculation(matrixA, type):
     try:
-        list_A = MATRIX(matrixA)
-        A, Ar, Ac = list_A[0], list_A[1], list_A[2]
+        A, Ar, Ac = MATRIX(matrixA)
 
         if type == "A":
             anser = "A="+LATEX(A)
@@ -81,6 +82,14 @@ def calculation(matrixA, type):
             else:
                 flash("Error:正方行列を入力してください")
                 anser = "正方行列を入力してください"
+
+        elif type == "Φ(t)":
+            if(Ar == Ac):
+                anser = "Φ(t)="+LATEX((s*eye(Ar)-A).inv())
+            else:
+                flash("Error:正方行列を入力してください")
+                anser = "正方行列を入力してください"
+
     except:
         anser = "Error"
         flash("エラー：もう一度入力してください")

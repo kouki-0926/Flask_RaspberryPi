@@ -2,6 +2,7 @@ from . import BMI
 from . import lim
 from . import bode
 from . import sysio
+from . import sysio_matrix
 from . import graph
 from . import Apart
 from . import nyquist
