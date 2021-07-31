@@ -1,7 +1,18 @@
 from flask import request, redirect, url_for, render_template, flash, Blueprint, make_response
 from flask_math.calculation import *
 
-Math = Blueprint("Math", __name__, template_folder="templates_math", static_folder="static_math")
+Math = Blueprint("Math", __name__,
+                 template_folder="templates_math", static_folder="static_math")
+
+
+@Math.route("/Homogeneous", methods=["GET", "POST"])
+def Homogeneous_view():
+    if request.method == "POST":
+        matrixA = request.form.get("matrixA")
+        anser = Homogeneous.Homogeneous(matrixA)
+        return render_template("Homogeneous.html", matrixA=matrixA, anser=anser, init_flag=0)
+    else:
+        return render_template("Homogeneous.html", init_flag=1)
 
 
 @Math.route("/index")
@@ -37,26 +48,11 @@ def Apart_view():
 @Math.route("/base_conversion", methods=["GET", "POST"])
 def base_conversion_view():
     if request.method == "POST":
-        try:
-            if request.form.get("bin") != "":
-                base = "binary"
-                before_conversion = request.form.get("bin")
-            elif request.form.get("oct") != "":
-                base = "octal"
-                before_conversion = request.form.get("oct")
-            elif request.form.get("dec") != "":
-                base = "decimal"
-                before_conversion = request.form.get("dec")
-            elif request.form.get("hex") != "":
-                base = "hexadecimal"
-                before_conversion = request.form.get("hex")
-            anser = base_conversion.base_conversion(base, before_conversion)
-        except:
-            anser = ["Error", "Error", "Error", "Error"]
-            flash("エラー：もう一度入力してください")
-        return render_template("base_conversion.html", bin=anser[0], oct=anser[1], dec=anser[2], hex=anser[3])
+        before_conversion = request.form.get("before_conversion")
+        Anser = base_conversion.base_conversion(before_conversion)
+        return render_template("base_conversion.html", before_conversion=before_conversion, Anser=Anser, init_flag=0)
     else:
-        return render_template("base_conversion.html")
+        return render_template("base_conversion.html", init_flag=1)
 
 
 @Math.route("/BMI", methods=["GET", "POST"])
@@ -319,13 +315,11 @@ def lim_view():
 def matrix_view():
     if request.method == "POST":
         matrixA = request.form.get("matrix")
-        Ar = request.form.get("Ar")
-        Ac = request.form.get("Ac")
         type = request.form.get("type")
-        anser = matrix.calculation(matrixA, Ar, Ac, type)
-        return render_template("matrix.html", matrix=matrixA, Ar=Ar, Ac=Ac, type=type, anser=anser, init_flag=0)
+        anser = matrix.calculation(matrixA, type)
+        return render_template("matrix.html", matrix=matrixA, type=type, anser=anser, init_flag=0)
     else:
-        return render_template("matrix.html", Ar=2, Ac=2, type="A", init_flag=1)
+        return render_template("matrix.html", type="A", init_flag=1)
 
 
 @Math.route("/matrix_2", methods=["GET", "POST"])
@@ -333,18 +327,14 @@ def matrix_2_view():
     if request.method == "POST":
         matrixA = request.form.get("matrixA")
         matrixB = request.form.get("matrixB")
-        Ar = request.form.get("Ar")
-        Ac = request.form.get("Ac")
-        Br = request.form.get("Br")
-        Bc = request.form.get("Bc")
         type = request.form.get("type")
         k = request.form.get("k")
         l = request.form.get("l")
 
-        anser = matrix_2.calculation(matrixA, matrixB, Ar, Ac, Br, Bc, type, k, l)
-        return render_template("matrix_2.html", matrixA=matrixA, matrixB=matrixB, Ar=Ar, Ac=Ac, Br=Br, Bc=Bc, type=type, k=k, l=l, anser=anser, init_flag=0)
+        anser = matrix_2.calculation(matrixA, matrixB, type, k, l)
+        return render_template("matrix_2.html", matrixA=matrixA, matrixB=matrixB, type=type, k=k, l=l, anser=anser, init_flag=0)
     else:
-        return render_template("matrix_2.html", Ar=2, Ac=2, Br=2, Bc=2, type="A", k=2, l=2, init_flag=1)
+        return render_template("matrix_2.html", type="A", k=2, l=2, init_flag=1)
 
 
 @Math.route("/max_min", methods=["GET", "POST"])
@@ -406,15 +396,22 @@ def Sieve_of_Eratosthenes_view():
 @Math.route("/sysio", methods=["GET", "POST"])
 def sysio_view():
     if request.method == "POST":
+        type = request.args.get("type")
         formula = request.form.get("formula")
-        formula_2 = request.form.get("formula_2")
         lower_end = request.form.get("lower_end")
         upper_end = request.form.get("upper_end")
-        type = request.args.get("type")
-        return render_template("sysio.html", formula=formula, formula_2=formula_2, lower_end=lower_end, upper_end=upper_end, type=type, init_flag=0)
+        if(type == "m"):
+            matrix_A = request.form.get("matrix_A")
+            matrix_B = request.form.get("matrix_B")
+            matrix_C = request.form.get("matrix_C")
+            matrix_D = request.form.get("matrix_D")
+            return render_template("sysio.html", matrix_A=matrix_A, matrix_B=matrix_B, matrix_C=matrix_C, matrix_D=matrix_D, formula=formula, lower_end=lower_end, upper_end=upper_end, type=type, init_flag=0)
+        else:
+            formula_2 = request.form.get("formula_2")
+            return render_template("sysio.html", formula=formula, formula_2=formula_2, lower_end=lower_end, upper_end=upper_end, type=type, init_flag=0)
     else:
         type = request.args.get("type")
-        if(type == "s" or type == "t"):
+        if(type == "s" or type == "t" or type == "m"):
             return render_template("sysio.html", lower_end=-2, upper_end=5, type=type, init_flag=1)
         else:
             return redirect(url_for('Math.sysio_view', type='s'))
@@ -422,14 +419,23 @@ def sysio_view():
 
 @Math.route("/sysio_graph", methods=["GET", "POST"])
 def sysio_graph_png():
-    formula = request.args.get("formula")
-    formula_2 = request.args.get("formula_2")
-    lower_end = request.args.get("lower_end")
-    upper_end = request.args.get("upper_end")
-    type = request.args.get("type")
     try:
-        response = sysio.sysio(
-            formula, formula_2, lower_end, upper_end, type=type)
+        type = request.args.get("type")
+        formula = request.args.get("formula")
+        lower_end = request.args.get("lower_end")
+        upper_end = request.args.get("upper_end")
+        if(type == "m"):
+            matrix_A = request.args.get("matrix_A")
+            matrix_B = request.args.get("matrix_B")
+            matrix_C = request.args.get("matrix_C")
+            matrix_D = request.args.get("matrix_D")
+            matrix_X = request.args.get("matrix_X")
+            response = sysio_matrix.sysio_matrix(
+                matrix_A, matrix_B, matrix_C, matrix_D, matrix_X, formula, lower_end, upper_end, type)
+        else:
+            formula_2 = request.args.get("formula_2")
+            response = sysio.sysio(
+                formula, formula_2, lower_end, upper_end, type)
         return response
     except:
         flash("Error")
