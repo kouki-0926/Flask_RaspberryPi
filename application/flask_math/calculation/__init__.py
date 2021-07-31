@@ -18,6 +18,7 @@ from . import equation
 from . import equations
 from . import Factorial
 from . import derivative
+from . import Homogeneous
 from . import factorization
 from . import newton_method
 from . import diff_equation

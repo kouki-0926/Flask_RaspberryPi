@@ -22,7 +22,10 @@
     </div>
   </div>
 </div><br><br><br>
+
+{% if type=="m" %}
 <h3>状態空間表現は開発中</h3>
+{% endif %}
 
 <form action="{{url_for('Math.sysio_view',type=type)}}" method="post" enctype="multipart/form-data">
   {% if type=="s" %}
